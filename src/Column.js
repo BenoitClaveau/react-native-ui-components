@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import { View } from 'react-native';
-import { screen } from './styles';
+import { flexColumn } from './styles';
 
-class Screen extends PureComponent {
+class Column extends PureComponent {
 
   render() {
     const { 
@@ -13,7 +13,7 @@ class Screen extends PureComponent {
 
     return (
       <View 
-        style={[screen.container, style]}
+        style={[flexColumn, style]}
         {...others}
       >
         {children}
@@ -22,4 +22,4 @@ class Screen extends PureComponent {
   }
 };
 
-export default Screen;
+export default Column;

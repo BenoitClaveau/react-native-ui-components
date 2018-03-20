@@ -4,7 +4,7 @@ import Icon from '../Icon';
 class Button extends PureComponent {
   render() {
     const { isOpen, navigate: {navigation: navigate}} = this.props;
-    if(this.props.isOpen)
+    if(isOpen)
       return <Icon name="close" onPress={() => navigate("DrawerClose")} />;
     return <Icon name="menu" onPress={() => navigate("DrawerOpen")} />;
   }

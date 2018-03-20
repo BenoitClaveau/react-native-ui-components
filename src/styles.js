@@ -13,13 +13,12 @@ const INPUT_FONT_SIZE = 18;
 const TITLE_FONT_SIZE = 20;
 const ICON_FONT_SIZE = 28;
 
-const padding = {
+export const padding = {
   padding: 16,
 }
 
-const vpadding = {
-  paddingLeft: 16,
-  paddingRight: 16,
+export const paddingHorizontal = {
+  paddingHorizontal: 16,
 }
 
 export const flexColumn = {
@@ -56,8 +55,6 @@ export const button = {
   container: {
     ...flexRow,
     ...padding,
-    paddingTop: 12,
-    paddingBottom: 12,
     backgroundColor: PRIMARY_COLOR
   },
   text: {
@@ -80,8 +77,7 @@ export const button = {
 export const textinput = {
   container: {
     backgroundColor: INPUT_BACKGROUND_COLOR,
-    paddingLeft: 8,
-    paddingRight: 8,
+    ...paddingHorizontal,
     borderRadius: 12,
     fontSize: 18,
     fontWeight: "600"
@@ -91,8 +87,7 @@ export const textinput = {
 export const texteditor = {
   textinput: {
     backgroundColor: "#FFF",
-    paddingLeft: 8,
-    paddingRight: 8,
+    ...paddingHorizontal,
     fontSize: INPUT_FONT_SIZE,
     fontWeight: "600",
     textAlignVertical: "top",
@@ -107,8 +102,7 @@ export const autocomplete = {
     justifyContent: "flex-start",
     height: 54,
     backgroundColor: INPUT_BACKGROUND_COLOR,
-    paddingLeft: 8,
-    paddingRight: 8,
+    ...paddingHorizontal,
     borderRadius: 12,
   },
   inputText: {
@@ -138,11 +132,10 @@ export const toolbar = {
     })
   },
   back: {
-    paddingLeft: 16,
-    paddingRight: 16,
+    ...paddingHorizontal,
   },
   title: {
-    ...vpadding,
+    ...paddingHorizontal,
     flex: 1,
     fontSize: INPUT_FONT_SIZE,
     color: PRIMARY_COLOR,
@@ -169,8 +162,7 @@ export const title = {
 }
 
 export const text = {
-  paddingTop: 12,
-  paddingBottom: 12,
+  ...paddingHorizontal,
   fontSize: TEXT_FONT_SIZE,
   color: TEXT_COLOR,
   fontWeight: "500"
@@ -179,14 +171,6 @@ export const text = {
 export const separator = {
   height: 1,
   backgroundColor: TEXT_COLOR
-}
-
-export const screen = {
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    backgroundColor: BACKGROUND_COLOR
-  }
 }
 
 export const picture = {
