@@ -1,0 +1,24 @@
+{
+  "name": "react-native-ui-components",
+  "version": "1.0.0",
+  "description": "UI components for React Native",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BenoitClaveau/react-native-ui-components.git"
+  },
+  "keywords": [
+    "UI",
+    "ReactNative",
+    "Component"
+  ],
+  "author": "Benoît Claveau <benoit.claveau@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BenoitClaveau/react-native-ui-components/issues"
+  },
+  "homepage": "https://github.com/BenoitClaveau/react-native-ui-components#readme"
+}
