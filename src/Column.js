@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
-import { View } from 'react-native';
-import { flexColumn } from './styles';
+import { 
+  StyleSheet,
+  View 
+} from 'react-native';
 
 class Column extends PureComponent {
 
@@ -13,7 +15,7 @@ class Column extends PureComponent {
 
     return (
       <View 
-        style={[flexColumn, style]}
+        style={[styles.column, style]}
         {...others}
       >
         {children}
@@ -21,5 +23,13 @@ class Column extends PureComponent {
     )
   }
 };
+
+const styles = StyleSheet.create({
+  column: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+  }
+});
 
 export default Column;

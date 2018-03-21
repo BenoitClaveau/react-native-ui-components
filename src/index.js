@@ -3,7 +3,7 @@ export { BackButton, DrawerButton } from './Buttons';
 export { default as ComboBox } from './ComboBox';
 export { default as DatePicker } from './DatePicker';
 export { default as Icon } from './Icon';
-export { default as List } from './List';
+export { default as Select } from './Select';
 export { default as TextInput } from './TextInput';
 export { default as Toolbar } from './Toolbar';
 export { default as Title } from './Title';

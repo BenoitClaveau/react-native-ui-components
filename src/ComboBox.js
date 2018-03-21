@@ -1,54 +1,62 @@
 import React, { PureComponent } from 'react';
-import { View, Text, ScrollView, Modal, FlatList, TouchableOpacity, InteractionManager, Keyboard } from 'react-native';
+import { 
+  StyleSheet,
+  View, 
+  Text, 
+  ScrollView, 
+  Modal, 
+  FlatList, 
+  TouchableOpacity, 
+  InteractionManager, 
+  Keyboard 
+} from 'react-native';
 import Toolbar from './Toolbar';
 import List from './List';
 import Button from './Button';
-import { autocomplete } from './styles';
+import { 
+  INPUT_BACKGROUND_COLOR,
+} from './theme';
 
 class ComboBox extends PureComponent {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      modalVisible: false
-    };
+  static getDerivedStateFromProps(props, state) {
+    return {
+        modalVisible: props.modalVisible,
+    }
+  }
+
+  state = {
   }
   
   open() {
-    InteractionManager.runAfterInteractions(() => {
-      this.setState({ modalVisible: true });
-    });
+    this.setState({ modalVisible: true });
+  }
+
+  close() {
+    this.setState({ modalVisible: false });
   }
 
   onSelect(item, index) {
-    InteractionManager.runAfterInteractions(() => {
+    const { onSelect } = this.props;
       this.setState({ modalVisible: false });
-      this.props.onSelect(item, index);
-    });
-  }
-
-  goBack() {
-    InteractionManager.runAfterInteractions(() => {
-      this.setState({ modalVisible: false });
-    });
+      onSelect && onSelect(item, index);
   }
 
   render() {
-    const { data, refreshing, refresh, waiting, placeholder, getLabel, selected, loadMore, title, renderItem, keyExtractor } = this.props;
-    const buttonText = selected ? getLabel(selected) : placeholder;
+    const { placeholder, selected } = this.props;
+    const placeholder = getPlaceholder(selected, styles);
     
     return (
       <View>
-
         <Modal
           animationType={"fade"}
           transparent={false}
           visible={this.state.modalVisible}
-          onRequestClose={() => {}}
+          onRequestClose={() => this.close()}
         >
           <View style={{flex:1}}>
             <Toolbar
-              goBack={() => this.goBack()}
+              goBack={() => this.close()}
               title={title}
             />
             <List 
@@ -65,14 +73,29 @@ class ComboBox extends PureComponent {
         </Modal>
 
         <TouchableOpacity
-          style={autocomplete.inputContainer}
+          style={styles.container}
           onPress={() => this.open()}
         >
-          <Text style={autocomplete.inputText}>{buttonText}</Text>
+          { placeholder }
         </TouchableOpacity>
       </View>
     )
   }
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    height: 54,
+    backgroundColor: INPUT_BACKGROUND_COLOR,
+    paddingHorizontal: 16,
+    borderRadius: 12,
+  },
+  text: {
+    
+  }
+});
 
 export default ComboBox;

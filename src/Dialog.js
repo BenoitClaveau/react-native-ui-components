@@ -2,13 +2,13 @@ import { Alert } from 'react-native';
 
 class Dialog {
     
-    alert(message) {
+    alert(message, title) {
         return new Promise((resolve, reject) => {
             Alert.alert(
-                `Erreur`, 
+                title || "Information", 
                 message, 
                 [
-                    { text: `Continuer`, onPress: () => {
+                    { text: `CONTINUER`, onPress: () => {
                         resolve();
                     }}
                 ],
@@ -17,17 +17,20 @@ class Dialog {
         });
     }
 
-    info(message) {
+    confirm(message, title) {
         return new Promise((resolve, reject) => {
             Alert.alert(
-                `Information`, 
+                title || "Confirmation", 
                 message, 
                 [
-                    { text: `Continuer`, onPress: () => {
+                    { text: `VALIDER`, onPress: () => {
                         resolve();
-                    }}
+                    }},
+                    { text: `ANNULER`, onPress: () => {
+                        reject();
+                    }},
                 ],
-                { cancelable: true }
+                { cancelable: false }
             )
         });
     }

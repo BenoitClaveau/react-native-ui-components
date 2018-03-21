@@ -1,31 +1,36 @@
 import React, { PureComponent } from 'react';
-import { TouchableOpacity, Text, View } from 'react-native';
-import { group } from './styles';
+import { 
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  View
+} from 'react-native';
 
 class Group extends PureComponent {
-
-  renderItem(child, index, isLast) {
-    const { style } = this.props;
-
-    return (
-      <View
-        key={index} 
-        style={[style, {paddingBottom: isLast ? 0 : 16}]}>
-        {child}
-      </View>
-    )
-  }
 
   render() {
     let { children, containerStyle } = this.props;
     if (!Array.isArray(children)) children = [children];
-    const last = children.length - 1;
+    const last = Math.max(children.length, 0) - 1;
     return (
       <View style={[group.container, containerStyle]}>
-        { children.map((child, index) => this.renderItem(child, index, index == last)) }
+        { children.map((child, index) => {
+          <View
+            key={index} 
+            style={[style, {paddingBottom: index == last ? 0 : 16}]}
+          >
+            {child}
+          </View>
+        })}
       </View>
     )
   }
 };
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+  }
+});
 
 export default Group;

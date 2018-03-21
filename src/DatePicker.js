@@ -1,26 +1,28 @@
 import React, { PureComponent } from 'react';
-import { DatePickerAndroid, DatePickerIOS, TouchableOpacity, Platform, Text, Dimensions } from 'react-native';
+import { 
+  DatePickerAndroid, 
+  DatePickerIOS, 
+  TouchableOpacity, 
+  Platform, 
+  Text, 
+} from 'react-native';
 import moment from 'moment';
 import Button from './Button';
-const { height, width } = Dimensions.get('window');
 
 class MyDatePicker extends PureComponent {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      date: moment(this.props.date).toDate()
+  static getDerivedStateFromProps(props, state) {
+    return {
+        date: moment(props.date).toDate(),
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.date != this.state.date.toJSON())
-      this.setState({ date: moment(nextProps.date).toDate() })
+  state = {
   }
+
 
   render() {
     if (Platform.OS === 'ios')
-      //TODO use modal
       return (
         <DatePickerIOS
           style={{  width: width, height: 200 }}

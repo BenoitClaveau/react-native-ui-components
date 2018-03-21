@@ -1,6 +1,10 @@
 import React, { PureComponent } from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
-import { picture } from './styles';
+import { 
+  StyleSheet,
+  View, 
+  Image, 
+  TouchableOpacity
+} from 'react-native';
 
 class Picture extends PureComponent {
 
@@ -16,7 +20,7 @@ class Picture extends PureComponent {
     if (onPress) {
       return (
         <TouchableOpacity
-          style={[picture.container, containerStyle]}
+          style={[styles.container, containerStyle]}
           onPress={onPress}
         >
           <Image 
@@ -29,7 +33,7 @@ class Picture extends PureComponent {
     else {
       return (
         <View 
-          style={[picture.container, containerStyle]}
+          style={[styles.container, containerStyle]}
         >
           <Image 
             {...others} 
@@ -40,5 +44,13 @@ class Picture extends PureComponent {
     }
   }
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center"
+  }
+});
 
 export default Picture;

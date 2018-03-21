@@ -1,6 +1,14 @@
 import React, { PureComponent } from 'react';
-import { TouchableOpacity, Text, View } from 'react-native';
-import { title } from './styles';
+import {
+  StyleSheet,
+  TouchableOpacity, 
+  Text, 
+  View 
+} from 'react-native';
+import { 
+  TITLE_FONT_SIZE,
+  PRIMARY_COLOR
+} from './theme';
 
 class Title extends PureComponent {
 
@@ -8,19 +16,34 @@ class Title extends PureComponent {
     const { name, onPress, style } = this.props;
     if (onPress) {
       return (
-        <TouchableOpacity style={[title.container, style]}>
-          <Text style={title.text}>{this.props.children}</Text>
+        <TouchableOpacity style={[styles.container, style]}>
+          <Text style={styles.text}>{this.props.children}</Text>
         </TouchableOpacity>
       )
     }
     else {
       return (
-        <View style={[title.container, style]}>
-          <Text style={title.text}>{this.props.children}</Text>
+        <View style={[styles.container, style]}>
+          <Text style={styles.text}>{this.props.children}</Text>
         </View>
       )
     }
   }
 };
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  text: {
+    fontSize: TITLE_FONT_SIZE,
+    color: PRIMARY_COLOR,
+    fontWeight: "600"
+  },
+});
+
 
 export default Title;

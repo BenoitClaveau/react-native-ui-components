@@ -8,16 +8,17 @@ export const TOOLBAR_BACKGROUND_COLOR = "#EEE";
 export const INPUT_BACKGROUND_COLOR = "#CCC";
 export const TEXT_COLOR = "#333";
 
-const TEXT_FONT_SIZE = 16;
-const INPUT_FONT_SIZE = 18;
-const TITLE_FONT_SIZE = 20;
-const ICON_FONT_SIZE = 28;
+export const TEXT_FONT_SIZE = 16;
+export const INPUT_FONT_SIZE = 18;
+export const TITLE_FONT_SIZE = 20;
+export const ICON_FONT_SIZE = 28;
 
-export const padding = {
+
+export const PADDING = {
   padding: 16,
 }
 
-export const paddingHorizontal = {
+export const PADDING_HORIZONTAL = {
   paddingHorizontal: 16,
 }
 
@@ -74,27 +75,6 @@ export const button = {
   }
 }
 
-export const textinput = {
-  container: {
-    backgroundColor: INPUT_BACKGROUND_COLOR,
-    ...paddingHorizontal,
-    borderRadius: 12,
-    fontSize: 18,
-    fontWeight: "600"
-  }
-}
-
-export const texteditor = {
-  textinput: {
-    backgroundColor: "#FFF",
-    ...paddingHorizontal,
-    fontSize: INPUT_FONT_SIZE,
-    fontWeight: "600",
-    textAlignVertical: "top",
-    color: TEXT_COLOR
-  }
-}
-
 export const autocomplete = {
   inputContainer: {
     flexDirection: "row",
@@ -116,50 +96,6 @@ export const combobox = {
   ...input,
 }
 
-export const toolbar = {
-  container: {
-    ...flexLeftRow,
-    backgroundColor: TOOLBAR_BACKGROUND_COLOR,
-    ...Platform.select({
-        ios: {
-            height: 64,
-            paddingTop: 20,
-        },
-        android: {
-            height: 54,
-            paddingTop: 0,
-        }
-    })
-  },
-  back: {
-    ...paddingHorizontal,
-  },
-  title: {
-    ...paddingHorizontal,
-    flex: 1,
-    fontSize: INPUT_FONT_SIZE,
-    color: PRIMARY_COLOR,
-    fontWeight: "600"
-  },
-  input: {
-    flex: 1,
-    marginRight: 16,
-    marginTop: 6,
-    marginBottom: 6,
-  }
-}
-
-export const title = {
-  container: {
-    ...flexRow,
-    ...padding,
-  },
-  text: {
-    fontSize: INPUT_FONT_SIZE,
-    color: PRIMARY_COLOR,
-    fontWeight: "600",
-  }
-}
 
 export const text = {
   ...paddingHorizontal,

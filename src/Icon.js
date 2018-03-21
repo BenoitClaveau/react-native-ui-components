@@ -1,11 +1,15 @@
 import React, { PureComponent } from 'react';
-import { TouchableOpacity, View, StyleSheet } from 'react-native';
+import { 
+  StyleSheet,
+  TouchableOpacity, 
+  View, 
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 class MyIcon extends PureComponent {
 
   render() {
-    let { name, onPress, style } = this.props;
+    const { name, onPress, style } = this.props;
     
     const { 
       fontSize, 

@@ -1,125 +1,80 @@
 import React, { PureComponent } from 'react';
-import { View, Text, TextInput, ScrollView, Modal, FlatList, TouchableOpacity, InteractionManager, Keyboard } from 'react-native';
-import Toolbar from './Toolbar';
-import RootSiblings from 'react-native-root-siblings';
-import { texteditor, toolbar } from './styles';
+import { 
+  StyleSheet,
+  View, 
+  Text, 
+  TextInput, 
+  ScrollView, 
+  FlatList, 
+  TouchableOpacity, 
+  InteractionManager, 
+  Keyboard,
+  Dimensions
+} from 'react-native';
+import Modal from './model';
+import { 
+  INPUT_FONT_SIZE,
+  TEXT_COLOR
+} from './theme';
+
+const window = Dimensions.get('window');
 
 class TextEditor extends PureComponent {
 
-  static dialogs = [];
-
-  static open(props) {
-    const dialog = new RootSiblings(
-      <TextEditor
-        {...props}
-        modalVisible={true}
-        onEndEditing={(event) => { 
-          props.onEndEditing(event);
-          this.destroy();
-        }}
-        goBack={() => {
-          this.destroy();
-        }}
-      />
-    );
-    this.dialogs.push(dialog);
+  static getDerivedStateFromProps(props, state) {
+    return {
+        text: props.text,
+    }
   }
 
-  static destroy() {
-    const dialog = this.dialogs.pop();
-    setImmediate(() => {
-      dialog.destroy();
-    });
+  state = {
+    height: 0,
+    keyboardShow: false
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      modalVisible: this.props.modalVisible,
-      value: this.props.value,
-      keyboardShow: false
-    };
-  }
-
-  componentWillMount () {
+  componentDidMount () {
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
         this.setState({keyboardShow: true})
     });
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
         this.setState({keyboardShow: false})
     });
-}
+  }
 
   componentWillUnmount () {
     this.keyboardDidShowListener.remove();
     this.keyboardDidHideListener.remove();
   }
-  
-  open() {
-    InteractionManager.runAfterInteractions(() => {
-      this.setState({ modalVisible: true });
-    });
-  }
-
-  close() {
-    InteractionManager.runAfterInteractions(() => {
-      this.setState({ modalVisible: false });
-    });
-  }
-
-  goBack() {
-    InteractionManager.runAfterInteractions(() => {
-      this.setState({ modalVisible: false });
-      this.props.goBack && this.props.goBack();
-    });
-  }
 
   render() {
-    const { title, onEndEditing, style, placeholder } = this.props;
+    const { height } = this.state;
+    const { title, style } = this.props;
     
     return (
-        <Modal
-          animationType={"fade"}
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {}}
-        >
-          <View 
-            style={{flex:1}}
-            onLayout={(ev) => {
-              var fullHeight = ev.nativeEvent.layout.height - toolbar.container.height;
-              this.setState({ height: fullHeight, fullHeight: fullHeight});
-            }}
-          >
-
-            <Toolbar
-              goBack={() => this.goBack()}
-              title={title}
-              clear={() => this.textinput.clear()}
-              validate={() => this.textinput.blur()}
-            />
-
-            <ScrollView keyboardDismissMode='interactive'>
-              <TextInput 
-                ref={ref => this.textinput = ref}
-                multiline={true}
-                onChangeText={(text) => {
-                  this.state.value = text;
-                }}
-                onEndEditing={onEndEditing}
-                defaultValue={this.state.value}
-                placeholder={placeholder}
-                autoFocus={true}
-                autoGrow={true}
-                underlineColorAndroid={"transparent"}
-                style={[texteditor.textinput, { height: this.state.height }]}
-
-              />
-            </ScrollView>
-          </View> 
-        </Modal>
+      <Modal>
+        <TextInput 
+          ref={ref => this.textinput = ref}
+          multiline={true}
+          autoFocus={true}
+          autoGrow={true}
+          underlineColorAndroid={"transparent"}
+          {...this.props}
+          style={[styles.textinput, { height: height }]}
+        />
+      </Modal>
     )
   }
 };
+
+const styles = StyleSheet.create({
+  textinput: {
+    backgroundColor: "#FFF",
+    paddingHorizontal : 16,
+    fontSize: INPUT_FONT_SIZE,
+    fontWeight: "600",
+    textAlignVertical: "top",
+    color: TEXT_COLOR
+  }
+});
 
 export default TextEditor;
