@@ -22,11 +22,14 @@ class MyDatePicker extends PureComponent {
 
 
   render() {
+
+    const { onDateChange } = this.props;
+
     if (Platform.OS === 'ios')
       return (
         <DatePickerIOS
           style={{  width: width, height: 200 }}
-          onDateChange={this.props.onDateChange}
+          onDateChange={onDateChange}
           date={this.state.date}
           mode="date"
         />
@@ -40,7 +43,7 @@ class MyDatePicker extends PureComponent {
               date: this.state.date
             }).then(({ action, year, month, day }) => {
               if (action !== DatePickerAndroid.dismissedAction) {
-                this.props.onDateChange(new Date(Date.UTC(year, month, day)))
+                onDateChange(new Date(year, month, day))
               }
             });
           }}

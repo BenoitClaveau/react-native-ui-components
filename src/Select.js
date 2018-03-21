@@ -9,7 +9,11 @@ class Select extends PureComponent {
 
   render() {
 
-    const { onPress, renderItem } = this.props;
+    const { 
+      onPress, 
+      renderItem, 
+      ...others
+    } = this.props;
 
     return (
       <FlatList
@@ -17,6 +21,7 @@ class Select extends PureComponent {
         keyboardDismissMode="on-drag"
         onEndReachedThreshold={1}
         renderItem={(...args) => {
+          if (!renderItem) return null;
           return (
             <TouchableOpacity
               underlayColor='transparent'
@@ -26,6 +31,7 @@ class Select extends PureComponent {
             </TouchableOpacity>
           )
         }}
+        {...others}
       />
     );
   }

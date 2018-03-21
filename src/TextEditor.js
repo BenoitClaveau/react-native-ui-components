@@ -48,7 +48,7 @@ class TextEditor extends PureComponent {
 
   render() {
     const { height } = this.state;
-    const { title, style } = this.props;
+    const { title, style, ...others } = this.props;
     
     return (
       <Modal>
@@ -58,7 +58,7 @@ class TextEditor extends PureComponent {
           autoFocus={true}
           autoGrow={true}
           underlineColorAndroid={"transparent"}
-          {...this.props}
+          {...others}
           style={[styles.textinput, { height: height }]}
         />
       </Modal>

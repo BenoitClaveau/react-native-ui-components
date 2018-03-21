@@ -19,16 +19,25 @@ class MyModal extends PureComponent {
   }
   
   open() {
+    const { onOpen } = this.props;
     this.setState({ modalVisible: true });
+    onOpen && onOpen();
   }
 
   close() {
+    const { onClose } = this.props;
     this.setState({ modalVisible: false });
+    onClose && onClose();
   }
 
   render() {
-    const { children } = this.props;
 
+    const { 
+      children,
+      renderPlaceholder,
+      ...others
+    } = this.props;
+    
     return (
       <View>
         <Modal
@@ -39,12 +48,19 @@ class MyModal extends PureComponent {
         >
           <View style={{flex:1}}>
             <Toolbar
+              {...others}
               goBack={() => this.close()}
-              title={title}
             />
             { children }
           </View>
         </Modal>
+        { renderPlaceholder &&
+        <TouchableOpacity
+          onPress={() => this.open()}
+        >
+          { renderPlaceholder() }
+        </TouchableOpacity>
+        }
       </View>
     )
   }

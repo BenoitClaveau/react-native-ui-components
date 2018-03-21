@@ -5,9 +5,7 @@ import {
         View, 
         Text 
 } from 'react-native';
-import BackButton from './Buttons/BackButton';
-import ClearButton from './Buttons/ClearButton';
-import ValidateButton from './Buttons/ValidateButton';
+import Button from './Button';
 import TextInput from './TextInput';
 import { 
         TOOLBAR_BACKGROUND_COLOR,
@@ -18,32 +16,39 @@ import {
 class Toolbar extends PureComponent {
 
   render() {
-    const { back, title, goBack, placeholder, value, onChange, onBlur, onEndEditing, clear, validate } = this.props;
+          
+    const { 
+        goBack,
+        clear,
+        title,
+        renderPlaceholder,
+        ...others
+      } = this.props;
+
     return (
       <View style={styles.container}>
-        <BackButton goBack={goBack} />
+        <Button
+                onPress={goBack}
+                iconLeft="md-back"
+        />
 { title &&
         <Text style={styles.title}>{title}</Text>
 }
 { onChange &&
         <TextInput
-          style={styles.input}
-          placeholder={placeholder}
-          value={value}
           blurOnSubmit={true}
-          onChange={event => onChange(event.nativeEvent.text)}
-          onBlur={event => onBlur && onBlur(event)}
-          onEndEditing={event => onEndEditing && onEndEditing(event)}
+          {...others}
+          style={styles.input}
         />
 }
 { !title && !onChange && 
         <View style={{flex: 1}}></View>
 }
 { clear &&
-        <ClearButton clear={clear}/>
-}
-{ validate &&
-        <ValidateButton validate={validate}/>
+        <Button
+                onPress={clear}
+                iconLeft="md-clear"
+        />
 }
       </View>
     )

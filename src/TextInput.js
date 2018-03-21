@@ -24,7 +24,7 @@ class MyTextInput extends PureComponent {
 
   render() {
     const { maxHeight, height } = this.state;
-    const { style } = this.props;
+    const { style, ...others } = this.props;
 
     return (
       <TextInput
@@ -32,7 +32,7 @@ class MyTextInput extends PureComponent {
           onContentSizeChange={(event) => {
             this.setState({ height: event.nativeEvent.contentSize.height })
           }}
-          {...this.props}
+          {...others}
           style={[styles.container, style, { height: Math.max(maxHeight, height) }]}
       />
     );

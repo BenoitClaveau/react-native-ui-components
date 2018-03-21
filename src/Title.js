@@ -13,18 +13,18 @@ import {
 class Title extends PureComponent {
 
   render() {
-    const { name, onPress, style } = this.props;
+    const { name, onPress, style, children } = this.props;
     if (onPress) {
       return (
         <TouchableOpacity style={[styles.container, style]}>
-          <Text style={styles.text}>{this.props.children}</Text>
+          <Text style={styles.text}>{children}</Text>
         </TouchableOpacity>
       )
     }
     else {
       return (
         <View style={[styles.container, style]}>
-          <Text style={styles.text}>{this.props.children}</Text>
+          <Text style={styles.text}>{children}</Text>
         </View>
       )
     }

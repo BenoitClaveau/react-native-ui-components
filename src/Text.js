@@ -13,9 +13,9 @@ import {
 class MyText extends PureComponent {
 
   render() {
-    const { style } = this.props;
+    const { style, children } = this.props;
     return (
-       <Text style={[styles.text, style]}>{this.props.children}</Text>
+       <Text style={[styles.text, style]}>{children}</Text>
     )
   }
 };
