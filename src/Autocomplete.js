@@ -1,16 +1,9 @@
 import React, { PureComponent } from 'react';
 import { 
   View, 
-  Text, 
-  ScrollView, 
-  FlatList, 
-  TouchableOpacity, 
-  InteractionManager, 
-  Keyboard 
 } from 'react-native';
 import Modal from './Modal';
-import List from './List';
-import TextInput from './TextInput';
+import Select from './Select';
 import debounce from 'debounce';
 
 class AutoComplete extends PureComponent {
@@ -23,11 +16,11 @@ class AutoComplete extends PureComponent {
   onChange(text) {
     if (!text) text = null;
     this.setState({q: text});
-    this.debounceRefresh();
+    this.debounceFetch();
   }
 
-  debounceRefresh = debounce(() => {
-    this.props.refresh(this.state.q)
+  debounceFetch = debounce(() => {
+    this.props.fetch(this.state.q)
   }, 150)
 
   render() {

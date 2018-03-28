@@ -27,7 +27,7 @@ class Select extends PureComponent {
               underlayColor='transparent'
               onPress={() => onPress && onPress(...args)}
             >
-              {renderItem && renderItem(...args)}
+              {renderItem(...args)}
             </TouchableOpacity>
           )
         }}

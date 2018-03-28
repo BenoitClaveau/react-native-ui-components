@@ -26,7 +26,7 @@ class Column extends PureComponent {
 
 const styles = StyleSheet.create({
   column: {
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "flex-start",
   }

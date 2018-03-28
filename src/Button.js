@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { 
+  StyleSheet,
   View,
   TouchableOpacity,
   Text
@@ -30,7 +31,7 @@ class Button extends PureComponent {
     } = this.props;
     
 
-    const textContainerStyle = textContainer;
+    let textContainerStyle = textContainer;
     if (iconLeft && !iconRight) textContainerStyle = textContainerLeft;
     if (!iconLeft && iconRight) textContainerStyle = textContainerRight;
     

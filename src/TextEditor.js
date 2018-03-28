@@ -1,23 +1,12 @@
 import React, { PureComponent } from 'react';
 import { 
   StyleSheet,
-  View, 
-  Text, 
-  TextInput, 
-  ScrollView, 
-  FlatList, 
-  TouchableOpacity, 
-  InteractionManager, 
-  Keyboard,
-  Dimensions
 } from 'react-native';
-import Modal from './model';
+import Modal from './Modal';
 import { 
   INPUT_FONT_SIZE,
   TEXT_COLOR
 } from './theme';
-
-const window = Dimensions.get('window');
 
 class TextEditor extends PureComponent {
 
@@ -28,26 +17,9 @@ class TextEditor extends PureComponent {
   }
 
   state = {
-    height: 0,
-    keyboardShow: false
-  }
-
-  componentDidMount () {
-    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
-        this.setState({keyboardShow: true})
-    });
-    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-        this.setState({keyboardShow: false})
-    });
-  }
-
-  componentWillUnmount () {
-    this.keyboardDidShowListener.remove();
-    this.keyboardDidHideListener.remove();
   }
 
   render() {
-    const { height } = this.state;
     const { title, style, ...others } = this.props;
     
     return (
@@ -59,7 +31,7 @@ class TextEditor extends PureComponent {
           autoGrow={true}
           underlineColorAndroid={"transparent"}
           {...others}
-          style={[styles.textinput, { height: height }]}
+          style={[styles.textinput, style]}
         />
       </Modal>
     )
