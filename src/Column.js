@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   column: {
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "space-around",
   }
 });
 

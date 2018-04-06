@@ -31,49 +31,51 @@ class Button extends PureComponent {
     } = this.props;
     
 
-    let textContainerStyle = textContainer;
-    if (iconLeft && !iconRight) textContainerStyle = textContainerLeft;
-    if (!iconLeft && iconRight) textContainerStyle = textContainerRight;
+    let textContainerStyle = styles.textContainer;
+    if (iconLeft && !iconRight) textContainerStyle = styles.textContainerLeft;
+    if (!iconLeft && iconRight) textContainerStyle = styles.textContainerRight;
     
     return (
-      <TouchableOpacity
-        style={[styles.container, style, { opacity: disabled ? 0.4 : 1 }]}
-        onPress={() => !disabled && onPress()}
-      >
-{ iconLeft &&
-        <Icon 
-          name={iconLeft}
-          style={[styles.iconLeft, iconLeftStyle]}
-        />
-}
-{ title && !subTitle &&
-        <Text 
-          style={[styles.text, textStyle]}
+      <View style={{flexDirection: "row"}}>
+        <TouchableOpacity
+          style={[styles.container, style, { opacity: disabled ? 0.4 : 1 }]}
+          onPress={() => !disabled && onPress()}
         >
-          {title.toUpperCase()}
-        </Text>
-}
-{ title && subTitle &&
-        <View style={textContainerStyle}>
+  { iconLeft &&
+          <Icon 
+            name={iconLeft}
+            style={[styles.iconLeft, iconLeftStyle]}
+          />
+  }
+  { title && !subTitle &&
           <Text 
             style={[styles.text, textStyle]}
           >
             {title.toUpperCase()}
           </Text>
-          <Text 
-            style={[styles.subText, subTextStyle]}
-          >
-            {subTitle}
-          </Text>
-        </View>
-}
-{ iconRight &&
-        <Icon 
-          name={iconRight}
-          style={[styles.iconRight, iconRightStyle]}
-        />
-}
-      </TouchableOpacity>
+  }
+  { title && subTitle &&
+          <View style={textContainerStyle}>
+            <Text 
+              style={[styles.text, textStyle]}
+            >
+              {title.toUpperCase()}
+            </Text>
+            <Text 
+              style={[styles.subText, subTextStyle]}
+            >
+              {subTitle}
+            </Text>
+          </View>
+  }
+  { iconRight &&
+          <Icon 
+            name={iconRight}
+            style={[styles.iconRight, iconRightStyle]}
+          />
+  }
+        </TouchableOpacity>
+      </View>
     )
   }
 };
@@ -81,10 +83,13 @@ class Button extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
+    flexGrow: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: PRIMARY_COLOR
+    backgroundColor: PRIMARY_COLOR,
+    height: 48,
+    borderRadius: 24,
   },
   textContainer: {
     flexDirection: "column",
