@@ -1,16 +1,18 @@
 import { Alert } from 'react-native';
 
 class Dialog {
-    
+
     alert(message, title) {
         return new Promise((resolve, reject) => {
             Alert.alert(
-                title || "Information", 
-                message, 
+                title || "Information",
+                message,
                 [
-                    { text: `CONTINUER`, onPress: () => {
-                        resolve();
-                    }}
+                    {
+                        text: `CONTINUER`, onPress: () => {
+                            resolve();
+                        }
+                    }
                 ],
                 { cancelable: true }
             )
@@ -20,15 +22,19 @@ class Dialog {
     confirm(message, title) {
         return new Promise((resolve, reject) => {
             Alert.alert(
-                title || "Confirmation", 
-                message, 
+                title || "Confirmation",
+                message,
                 [
-                    { text: `VALIDER`, onPress: () => {
-                        resolve();
-                    }},
-                    { text: `ANNULER`, onPress: () => {
-                        reject();
-                    }},
+                    {
+                        text: `VALIDER`, onPress: () => {
+                            resolve();
+                        }
+                    },
+                    {
+                        text: `ANNULER`, onPress: () => {
+                            reject();
+                        }
+                    },
                 ],
                 { cancelable: false }
             )

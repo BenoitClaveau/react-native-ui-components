@@ -1,12 +1,24 @@
-export const PRIMARY_COLOR = "#921863";
-export const INACTIVE_PRIMARY_COLOR = "#AAA";
-export const ACCENT_COLOR = "#0080FF";
-export const BACKGROUND_COLOR = "#EEE";
-export const TOOLBAR_BACKGROUND_COLOR = "#EEE";
-export const INPUT_BACKGROUND_COLOR = "#CCC";
-export const TEXT_COLOR = "#333";
+import { PixelRatio } from 'react-native';
 
-export const TEXT_FONT_SIZE = 16;
-export const INPUT_FONT_SIZE = 18;
-export const TITLE_FONT_SIZE = 20;
-export const ICON_FONT_SIZE = 28;
+const fontScale = PixelRatio.getFontScale();
+
+let theme = {
+    PRIMARY_COLOR: "#921863",
+    INACTIVE_PRIMARY_COLOR: "#AAA",
+    ACCENT_COLOR: "#0080FF",
+    BACKGROUND_COLOR: "#FFF",
+    TOOLBAR_BACKGROUND_COLOR: "#EEE",
+    INPUT_BACKGROUND_COLOR: "#CCC",
+    TEXT_COLOR: "#333",
+    TEXT_FONT_SIZE: 16 * fontScale,
+    INPUT_FONT_SIZE: 18 * fontScale,
+    TITLE_FONT_SIZE: 20 * fontScale,
+    ICON_FONT_SIZE: 28 * fontScale,
+}
+
+export function customize(options) {
+    theme = { ...theme, ...options };
+}
+
+export default theme;
+

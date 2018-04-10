@@ -1,35 +1,35 @@
 import React, { PureComponent } from 'react';
-import { 
-  StyleSheet,
-  View 
+import {
+    StyleSheet,
+    View
 } from 'react-native';
 
 class Column extends PureComponent {
 
-  render() {
-    const { 
-      children,
-      style,
-      ...others
-    } = this.props;
+    render() {
+        const {
+            children,
+            style,
+            ...others
+        } = this.props;
 
-    return (
-      <View 
-        style={[styles.column, style]}
-        {...others}
-      >
-        {children}
-      </View>
-    )
-  }
+        return (
+            <View
+                style={[styles.column, style]}
+                {...others}
+            >
+                {children}
+            </View>
+        )
+    }
 };
 
 const styles = StyleSheet.create({
-  column: {
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "space-around",
-  }
+    column: {
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "flex-start",
+    }
 });
 
 export default Column;

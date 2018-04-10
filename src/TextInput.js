@@ -1,49 +1,54 @@
 import React, { PureComponent } from 'react';
-import { 
-  StyleSheet,
-  TextInput, 
-  View 
+import {
+    StyleSheet,
+    TextInput,
+    View
 } from 'react-native';
-import { 
-  INPUT_BACKGROUND_COLOR,
-  INPUT_FONT_SIZE,
-  PRIMARY_COLOR
+import {
+    INPUT_BACKGROUND_COLOR,
+    INPUT_FONT_SIZE,
+    PRIMARY_COLOR
 } from './theme';
 
 class MyTextInput extends PureComponent {
 
-  state = {
-  }
+    static getDerivedStateFromProps(props, state) {
+        return {
+            maxHeight: props.maxHeight || 48,
+        }
+    }
 
-  render() {
-    const { style, ...others } = this.props;
+    state = {
+        height: 22
+    }
 
-    return (
-      <View style={styles.container}>
-        <TextInput
-            underlineColorAndroid={"transparent"}
-            {...others}
-            style={[styles.input, style]}
-        />
-      </View>
-    );
-  }
+    render() {
+        const { maxHeight, height } = this.state;
+        const { style, ...others } = this.props;
+
+        return (
+            <TextInput
+                underlineColorAndroid={"transparent"}
+                onContentSizeChange={(event) => {
+                    this.setState({ height: event.nativeEvent.contentSize.height })
+                }}
+                {...others}
+                style={[styles.input, style, { height: Math.max(maxHeight, height) }]}
+            />
+        );
+    }
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-  },
-  input: {
-    backgroundColor: INPUT_BACKGROUND_COLOR,
-    fontSize: INPUT_FONT_SIZE,
-    color: PRIMARY_COLOR,
-    paddingHorizontal: 16,
-    borderRadius: 12,
-    fontWeight: "600",
-    height: 48,
-    flexGrow: 1
-  },
+    input: {
+        flexDirection: "row", 
+        backgroundColor: INPUT_BACKGROUND_COLOR,
+        paddingHorizontal: 16,
+        borderRadius: 12,
+        fontSize: INPUT_FONT_SIZE,
+        color: PRIMARY_COLOR,
+        fontWeight: "600",
+    },
 });
 
 export default MyTextInput;
