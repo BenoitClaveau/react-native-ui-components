@@ -18,43 +18,60 @@ class Toolbar extends PureComponent {
 
     render() {
 
-        const {
-            goBack,
-            clear,
-            title,
-            renderPlaceholder,
-            onChange,
-            ...others
-        } = this.props;
+        const renderLeftComponent = this.props.renderLeftComponent ? this.props.renderLeftComponent() : this.renderLeftComponent();
+        const renderCenterComponent = this.props.renderCenterComponent ? this.props.renderCenterComponent() : this.renderCenterComponent();
+        const renderRightComponent = this.props.renderRightComponent ? this.props.renderRightComponent() : this.renderRightComponent();
 
         return (
             <View style={styles.container}>
-                <Icon
-                    onPress={goBack}
-                    name="md-arrow-back"
-                    style={styles.back}
-                />
-                {title &&
-                    <Text style={styles.title}>{title}</Text>
-                }
-                {onChange &&
-                    <TextInput
-                        blurOnSubmit={true}
-                        {...others}
-                        style={styles.input}
-                    />
-                }
-                {!title && !onChange &&
-                    <View style={{ flex: 1 }}></View>
-                }
-                {clear &&
-                    <Icon
-                        onPress={clear}
-                        name="md-close"
-                    />
-                }
+                <View style={styles.left}>
+                    { renderLeftComponent}
+                </View>
+                <View style={styles.center}>
+                    { renderCenterComponent}
+                </View>
+                <View style={styles.right}>
+                    { renderRightComponent}
+                </View>
             </View>
         )
+    }
+
+    renderLeftComponent() {
+        const {
+            goBack,
+        } = this.props;
+
+        return (
+            <Icon
+                onPress={goBack}
+                name="md-arrow-back"
+                style={styles.back}
+            />
+        );
+    }
+
+    renderCenterComponent() {
+        const {
+            title,
+        } = this.props;
+
+        return (
+            <Text style={styles.title}>{title}</Text>
+        );
+    }
+
+    renderRightComponent() {
+        const {
+            clear,
+        } = this.props;
+
+        return (
+            <Icon
+                onPress={clear}
+                name="md-close"
+            />
+        );
     }
 };
 
@@ -81,35 +98,47 @@ const styles = StyleSheet.create({
         },
         elevation: 4,
     },
-    title: {
+    left: {
         flexDirection: "row",
         alignItems: 'center',
-        fontSize: TITLE_FONT_SIZE,
-        color: PRIMARY_COLOR,
-        fontWeight: "600",
         ...Platform.select({
             ios: {
-                paddingHorizontal: 70,
+                width: 70,
+            },
+            android: {
+                width: 56,
+            }
+        })
+    },
+    center: {
+        flexDirection: "row",
+        alignItems: 'center',
+        ...Platform.select({
+            ios: {
                 justifyContent: "center"
             },
             android: {
-                paddingHorizontal: 56,
                 justifyContent: "flex-start"
             }
         })
     },
-    back: {
-        height: 24,
-        width: 24,
-        margin: 16,
-        fontSize: 24,
+    right: {
+        flexDirection: "row",
+        alignItems: 'center',
+        ...Platform.select({
+            ios: {
+                width: 70,
+            },
+            android: {
+                width: 56,
+            }
+        })
     },
-    input: {
-        flex: 1,
-        marginRight: 16,
-        marginTop: 6,
-        marginBottom: 6,
-    }
+    title: {
+        fontSize: TITLE_FONT_SIZE,
+        color: PRIMARY_COLOR,
+        fontWeight: "600",
+    },
 });
 
 export default Toolbar;
