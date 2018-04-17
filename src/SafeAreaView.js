@@ -4,7 +4,9 @@ import {
     SafeAreaView,
     StatusBar,
 } from 'react-native';
-import theme from 'react-native-ui-theme';
+import {
+    BACKGROUND_COLOR,
+} from './theme';
 
 class MySafeAreaView extends PureComponent {
 
@@ -29,7 +31,7 @@ class MySafeAreaView extends PureComponent {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: theme.BACKGROUND_COLOR,
+        backgroundColor: BACKGROUND_COLOR,
     }
 });
 
