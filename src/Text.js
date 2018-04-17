@@ -5,10 +5,7 @@ import {
     Text,
     View
 } from 'react-native';
-import {
-    TEXT_FONT_SIZE,
-    TEXT_COLOR
-} from './theme';
+import theme from 'react-native-ui-theme';
 
 class MyText extends PureComponent {
 
@@ -23,8 +20,8 @@ class MyText extends PureComponent {
 const styles = StyleSheet.create({
     text: {
         paddingHorizontal: 16,
-        fontSize: TEXT_FONT_SIZE,
-        color: TEXT_COLOR,
+        fontSize: theme.TEXT_FONT_SIZE,
+        color: theme.TEXT_COLOR,
         fontWeight: "500"
     }
 });

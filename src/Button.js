@@ -6,12 +6,7 @@ import {
     Text
 } from 'react-native';
 import Icon from './Icon';
-import {
-    PRIMARY_COLOR,
-    INPUT_FONT_SIZE,
-    BACKGROUND_COLOR,
-    ICON_FONT_SIZE
-} from './theme';
+import theme from 'react-native-ui-theme';
 
 class Button extends PureComponent {
 
@@ -84,7 +79,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: PRIMARY_COLOR
+        backgroundColor: theme.PRIMARY_COLOR
     },
     textContainer: {
         flexDirection: "column",
@@ -102,24 +97,24 @@ const styles = StyleSheet.create({
         justifyContent: "space-around"
     },
     text: {
-        fontSize: INPUT_FONT_SIZE,
-        color: BACKGROUND_COLOR,
+        fontSize: theme.INPUT_FONT_SIZE,
+        color: theme.BACKGROUND_COLOR,
         fontWeight: "600"
     },
     subText: {
-        fontSize: INPUT_FONT_SIZE - 4,
-        color: BACKGROUND_COLOR,
+        fontSize: theme.INPUT_FONT_SIZE - 4,
+        color: theme.BACKGROUND_COLOR,
         fontWeight: "600"
     },
     iconLeft: {
         marginRight: 8,
-        fontSize: ICON_FONT_SIZE,
-        color: BACKGROUND_COLOR,
+        fontSize: theme.ICON_FONT_SIZE,
+        color: theme.BACKGROUND_COLOR,
     },
     iconRight: {
         marginLeft: 8,
-        fontSize: ICON_FONT_SIZE,
-        color: BACKGROUND_COLOR,
+        fontSize: theme.ICON_FONT_SIZE,
+        color: theme.BACKGROUND_COLOR,
     }
 });
 

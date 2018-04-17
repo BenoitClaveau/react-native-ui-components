@@ -15,5 +15,3 @@ export { default as Column } from './src/Column';
 export { default as Dialog } from './src/Dialog';
 export { default as TextEditor } from './src/TextEditor';
 export { default as SafeAreaView } from './src/SafeAreaView';
-export { default as theme } from './src/theme';
-export { customize } from './src/theme';

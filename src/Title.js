@@ -5,10 +5,7 @@ import {
     Text,
     View
 } from 'react-native';
-import {
-    TITLE_FONT_SIZE,
-    PRIMARY_COLOR
-} from './theme';
+import theme from 'react-native-ui-theme';
 
 class Title extends PureComponent {
 
@@ -39,8 +36,8 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     text: {
-        fontSize: TITLE_FONT_SIZE,
-        color: PRIMARY_COLOR,
+        fontSize: theme.TITLE_FONT_SIZE,
+        color: theme.PRIMARY_COLOR,
         fontWeight: "600"
     },
 });

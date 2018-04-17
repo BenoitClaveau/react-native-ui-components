@@ -3,10 +3,7 @@ import {
     StyleSheet,
 } from 'react-native';
 import Modal from './Modal';
-import {
-    INPUT_FONT_SIZE,
-    TEXT_COLOR
-} from './theme';
+import theme from 'react-native-ui-theme';
 
 class TextEditor extends PureComponent {
 
@@ -42,10 +39,10 @@ const styles = StyleSheet.create({
     textinput: {
         backgroundColor: "#FFF",
         paddingHorizontal: 16,
-        fontSize: INPUT_FONT_SIZE,
+        fontSize: theme.INPUT_FONT_SIZE,
         fontWeight: "600",
         textAlignVertical: "top",
-        color: TEXT_COLOR
+        color: theme.TEXT_COLOR
     }
 });
 

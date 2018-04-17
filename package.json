@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/BenoitClaveau/react-native-ui-components/issues"
   },
-  "homepage": "https://github.com/BenoitClaveau/react-native-ui-components#readme"
+  "homepage": "https://github.com/BenoitClaveau/react-native-ui-components#readme",
+  "dependencies": {
+    "react-native-ui-theme": "git+https://github.com/BenoitClaveau/react-native-ui-theme.git"
+  }
 }

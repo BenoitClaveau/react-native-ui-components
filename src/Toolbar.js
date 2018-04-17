@@ -8,11 +8,7 @@ import {
 import Button from './Button';
 import Icon from './Icon';
 import TextInput from './TextInput';
-import {
-    TOOLBAR_BACKGROUND_COLOR,
-    TITLE_FONT_SIZE,
-    PRIMARY_COLOR
-} from './theme';
+import theme from 'react-native-ui-theme';
 
 class Toolbar extends PureComponent {
 
@@ -80,7 +76,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-start",
-        backgroundColor: "red",
         ...Platform.select({
             ios: {
                 height: 44,
@@ -135,8 +130,8 @@ const styles = StyleSheet.create({
         })
     },
     title: {
-        fontSize: TITLE_FONT_SIZE,
-        color: PRIMARY_COLOR,
+        fontSize: theme.TITLE_FONT_SIZE,
+        color: theme.PRIMARY_COLOR,
         fontWeight: "600",
     },
 });
