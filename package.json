@@ -23,8 +23,6 @@
   "homepage": "https://github.com/BenoitClaveau/react-native-ui-components#readme",
   "dependencies": {
     "debounce": "^1.1.0",
-    "react": "^16.3.2",
-    "react-native": "^0.55.2",
     "react-native-ui-theme": "git+https://github.com/BenoitClaveau/react-native-ui-theme.git",
     "react-native-vector-icons": "^4.6.0"
   }
