@@ -38,15 +38,18 @@ class TextEditor extends PureComponent {
     }
 };
 
-const styles = StyleSheet.create({
-    textinput: {
-        backgroundColor: "#FFF",
-        paddingHorizontal: 16,
-        fontSize: INPUT_FONT_SIZE,
-        fontWeight: "600",
-        textAlignVertical: "top",
-        color: TEXT_COLOR
-    }
-});
+let style;
+export function createStyleSheet() {
+    styles = StyleSheet.create({
+        textinput: {
+            backgroundColor: "#FFF",
+            paddingHorizontal: 16,
+            fontSize: INPUT_FONT_SIZE,
+            fontWeight: "600",
+            textAlignVertical: "top",
+            color: TEXT_COLOR
+        }
+    });
+};
 
 export default TextEditor;

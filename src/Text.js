@@ -20,13 +20,16 @@ class MyText extends PureComponent {
     }
 };
 
-const styles = StyleSheet.create({
-    text: {
-        paddingHorizontal: 16,
-        fontSize: TEXT_FONT_SIZE,
-        color: TEXT_COLOR,
-        fontWeight: "500"
-    }
-});
+let style;
+export function createStyleSheet() {
+    styles = StyleSheet.create({
+        text: {
+            paddingHorizontal: 16,
+            fontSize: TEXT_FONT_SIZE,
+            color: TEXT_COLOR,
+            fontWeight: "500"
+        }
+    });
+};
 
 export default MyText;

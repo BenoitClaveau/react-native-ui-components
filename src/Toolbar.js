@@ -75,70 +75,73 @@ class Toolbar extends PureComponent {
     }
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "flex-start",
-        backgroundColor: "red",
-        ...Platform.select({
-            ios: {
-                height: 44,
-                paddingTop: 20,
+let style;
+export function createStyleSheet() {
+    styles = StyleSheet.create({
+        container: {
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "flex-start",
+            backgroundColor: "red",
+            ...Platform.select({
+                ios: {
+                    height: 44,
+                    paddingTop: 20,
+                },
+                android: {
+                    height: 56,
+                    paddingTop: 0,
+                }
+            }),
+            shadowOpacity: 0.1,
+            shadowRadius: StyleSheet.hairlineWidth,
+            shadowOffset: {
+                height: StyleSheet.hairlineWidth,
             },
-            android: {
-                height: 56,
-                paddingTop: 0,
-            }
-        }),
-        shadowOpacity: 0.1,
-        shadowRadius: StyleSheet.hairlineWidth,
-        shadowOffset: {
-            height: StyleSheet.hairlineWidth,
+            elevation: 4,
         },
-        elevation: 4,
-    },
-    left: {
-        flexDirection: "row",
-        alignItems: 'center',
-        ...Platform.select({
-            ios: {
-                width: 70,
-            },
-            android: {
-                width: 56,
-            }
-        })
-    },
-    center: {
-        flexDirection: "row",
-        alignItems: 'center',
-        ...Platform.select({
-            ios: {
-                justifyContent: "center"
-            },
-            android: {
-                justifyContent: "flex-start"
-            }
-        })
-    },
-    right: {
-        flexDirection: "row",
-        alignItems: 'center',
-        ...Platform.select({
-            ios: {
-                width: 70,
-            },
-            android: {
-                width: 56,
-            }
-        })
-    },
-    title: {
-        fontSize: TITLE_FONT_SIZE,
-        color: PRIMARY_COLOR,
-        fontWeight: "600",
-    },
-});
+        left: {
+            flexDirection: "row",
+            alignItems: 'center',
+            ...Platform.select({
+                ios: {
+                    width: 70,
+                },
+                android: {
+                    width: 56,
+                }
+            })
+        },
+        center: {
+            flexDirection: "row",
+            alignItems: 'center',
+            ...Platform.select({
+                ios: {
+                    justifyContent: "center"
+                },
+                android: {
+                    justifyContent: "flex-start"
+                }
+            })
+        },
+        right: {
+            flexDirection: "row",
+            alignItems: 'center',
+            ...Platform.select({
+                ios: {
+                    width: 70,
+                },
+                android: {
+                    width: 56,
+                }
+            })
+        },
+        title: {
+            fontSize: TITLE_FONT_SIZE,
+            color: PRIMARY_COLOR,
+            fontWeight: "600",
+        },
+    });
+};
 
 export default Toolbar;

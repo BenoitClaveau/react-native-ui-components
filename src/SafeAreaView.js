@@ -28,11 +28,14 @@ class MySafeAreaView extends PureComponent {
         )
     }
 };
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: BACKGROUND_COLOR,
-    }
-});
+let style;
+export function createStyleSheet() {
+    styles = StyleSheet.create({
+        container: {
+            flex: 1,
+            backgroundColor: BACKGROUND_COLOR,
+        }
+    });
+}
 
 export default MySafeAreaView;

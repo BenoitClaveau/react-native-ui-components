@@ -31,19 +31,22 @@ class Title extends PureComponent {
     }
 };
 
-const styles = StyleSheet.create({
-    container: {
-        padding: 16,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center"
-    },
-    text: {
-        fontSize: TITLE_FONT_SIZE,
-        color: PRIMARY_COLOR,
-        fontWeight: "600"
-    },
-});
+let style;
+export function createStyleSheet() {
+    styles = StyleSheet.create({
+        container: {
+            padding: 16,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center"
+        },
+        text: {
+            fontSize: TITLE_FONT_SIZE,
+            color: PRIMARY_COLOR,
+            fontWeight: "600"
+        },
+    });
+};
 
 
 export default Title;

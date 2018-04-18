@@ -23,12 +23,15 @@ class Row extends PureComponent {
         )
     }
 };
-const styles = StyleSheet.create({
-    row: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "flex-start",
-    }
-});
+let style;
+export function createStyleSheet() {
+    styles = StyleSheet.create({
+        row: {
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "flex-start",
+        }
+    });
+}
 
 export default Row;

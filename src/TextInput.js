@@ -39,16 +39,19 @@ class MyTextInput extends PureComponent {
     }
 };
 
-const styles = StyleSheet.create({
-    input: {
-        flexDirection: "row", 
-        backgroundColor: INPUT_BACKGROUND_COLOR,
-        paddingHorizontal: 16,
-        borderRadius: 12,
-        fontSize: INPUT_FONT_SIZE,
-        color: PRIMARY_COLOR,
-        fontWeight: "600",
-    },
-});
+let style;
+export function createStyleSheet() {
+    styles = StyleSheet.create({
+        input: {
+            flexDirection: "row", 
+            backgroundColor: INPUT_BACKGROUND_COLOR,
+            paddingHorizontal: 16,
+            borderRadius: 12,
+            fontSize: INPUT_FONT_SIZE,
+            color: PRIMARY_COLOR,
+            fontWeight: "600",
+        },
+    });
+};
 
 export default MyTextInput;
