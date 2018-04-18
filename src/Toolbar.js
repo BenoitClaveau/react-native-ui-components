@@ -8,11 +8,7 @@ import {
 import Button from './Button';
 import Icon from './Icon';
 import TextInput from './TextInput';
-import {
-    TOOLBAR_BACKGROUND_COLOR,
-    TITLE_FONT_SIZE,
-    PRIMARY_COLOR
-} from './theme';
+import theme from 'react-native-ui-theme';
 
 class Toolbar extends PureComponent {
 

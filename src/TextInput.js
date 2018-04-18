@@ -4,11 +4,7 @@ import {
     TextInput,
     View
 } from 'react-native';
-import {
-    INPUT_BACKGROUND_COLOR,
-    INPUT_FONT_SIZE,
-    PRIMARY_COLOR
-} from './theme';
+import theme from 'react-native-ui-theme';
 
 class MyTextInput extends PureComponent {
 

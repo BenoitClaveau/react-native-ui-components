@@ -5,10 +5,7 @@ import {
     Text,
     View
 } from 'react-native';
-import {
-    TEXT_FONT_SIZE,
-    TEXT_COLOR
-} from './theme';
+import theme from 'react-native-ui-theme';
 
 class MyText extends PureComponent {
 

@@ -5,10 +5,7 @@ import {
     Text,
     View
 } from 'react-native';
-import {
-    TITLE_FONT_SIZE,
-    PRIMARY_COLOR
-} from './theme';
+import theme from 'react-native-ui-theme';
 
 class Title extends PureComponent {
 

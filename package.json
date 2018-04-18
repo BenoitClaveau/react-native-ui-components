@@ -2,7 +2,7 @@
   "name": "react-native-ui-components",
   "version": "1.0.1",
   "description": "UI components for React Native",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,5 +20,10 @@
   "bugs": {
     "url": "https://github.com/BenoitClaveau/react-native-ui-components/issues"
   },
-  "homepage": "https://github.com/BenoitClaveau/react-native-ui-components#readme"
+  "homepage": "https://github.com/BenoitClaveau/react-native-ui-components#readme",
+  "dependencies": {
+    "debounce": "^1.1.0",
+    "react-native-ui-theme": "git+https://github.com/BenoitClaveau/react-native-ui-theme.git",
+    "react-native-vector-icons": "^4.6.0"
+  }
 }
