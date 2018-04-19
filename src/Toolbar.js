@@ -8,7 +8,7 @@ import {
 import Button from './Button';
 import Icon from './Icon';
 import TextInput from './TextInput';
-import theme from 'react-native-ui-theme';
+import theme from "./Theme";
 
 class Toolbar extends PureComponent {
 
@@ -71,7 +71,7 @@ class Toolbar extends PureComponent {
     }
 };
 
-let style;
+let styles = {};
 export function createStyleSheet() {
     styles = StyleSheet.create({
         container: {
@@ -133,8 +133,8 @@ export function createStyleSheet() {
             })
         },
         title: {
-            fontSize: TITLE_FONT_SIZE,
-            color: PRIMARY_COLOR,
+            fontSize: theme.TITLE_FONT_SIZE,
+            color: theme.PRIMARY_COLOR,
             fontWeight: "600",
         },
     });

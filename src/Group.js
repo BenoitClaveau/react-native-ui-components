@@ -27,7 +27,7 @@ class Group extends PureComponent {
     }
 };
 
-let style;
+let styles = {};
     export function createStyleSheet() {
         styles = StyleSheet.create({
         container: {

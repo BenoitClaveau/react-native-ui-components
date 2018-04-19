@@ -5,7 +5,7 @@ import {
     Text,
     View
 } from 'react-native';
-import theme from 'react-native-ui-theme';
+import theme from "./Theme";
 
 class Title extends PureComponent {
 
@@ -28,7 +28,7 @@ class Title extends PureComponent {
     }
 };
 
-let style;
+let styles = {};
 export function createStyleSheet() {
     styles = StyleSheet.create({
         container: {
@@ -38,8 +38,8 @@ export function createStyleSheet() {
             justifyContent: "center"
         },
         text: {
-            fontSize: TITLE_FONT_SIZE,
-            color: PRIMARY_COLOR,
+            fontSize: theme.TITLE_FONT_SIZE,
+            color: theme.PRIMARY_COLOR,
             fontWeight: "600"
         },
     });

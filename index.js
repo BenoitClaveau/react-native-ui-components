@@ -1,4 +1,4 @@
-import { PixelRatio } from 'react-native';
+import { customize as customizeTheme } from './src/Theme';
 import { createStyleSheet as createStyleSheetButton } from './src/Button';
 import { createStyleSheet as createStyleSheetColumn } from './src/Column';
 import { createStyleSheet as createStyleSheetGroup } from './src/Group';
@@ -11,24 +11,9 @@ import { createStyleSheet as createStyleSheetTextInput } from './src/TextInput';
 import { createStyleSheet as createStyleSheetTitle } from './src/Title';
 import { createStyleSheet as createStyleSheetToolbar } from './src/Toolbar';
 
-const fontScale = PixelRatio.getFontScale();
 
-let theme = {
-    PRIMARY_COLOR: "#921863",
-    INACTIVE_PRIMARY_COLOR: "#AAA",
-    ACCENT_COLOR: "#0080FF",
-    BACKGROUND_COLOR: "#FFF",
-    TOOLBAR_BACKGROUND_COLOR: "#EEE",
-    INPUT_BACKGROUND_COLOR: "#CCC",
-    TEXT_COLOR: "#333",
-    TEXT_FONT_SIZE: 16 * fontScale,
-    INPUT_FONT_SIZE: 18 * fontScale,
-    TITLE_FONT_SIZE: 20 * fontScale,
-    ICON_FONT_SIZE: 28 * fontScale,
-}
-
-export function init(options) {
-    Object.assign(theme, options);
+export function customize(options) {
+    customizeTheme(options);
     createStyleSheetButton();
     createStyleSheetColumn();
     createStyleSheetGroup();
@@ -42,7 +27,7 @@ export function init(options) {
     createStyleSheetToolbar();
 }
 
-export default theme;
+export { default } from './src/Theme';
 export { default as Button } from './src/Button';
 export { default as Modal } from './src/Modal';
 export { default as ComboBox } from './src/ComboBox';

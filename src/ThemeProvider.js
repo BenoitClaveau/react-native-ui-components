@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
-import { init } from '../index';
+import { customize } from '../index';
 
 class ThemeProvider extends PureComponent {
   
   constructor(props) {
     super(props);
-    init(props.customize)
+    console.log("customize")
+    customize(props.customize)
   }
 
   render() {
