@@ -24,7 +24,7 @@ class MyIcon extends PureComponent {
                     onPress={onPress}
                 >
                     <Icon
-                        size={fontSize || 28}
+                        size={fontSize || 24}
                         color={color || "#000"}
                         name={name}
                     />
@@ -37,7 +37,7 @@ class MyIcon extends PureComponent {
                     style={others}
                 >
                     <Icon
-                        size={fontSize || 28}
+                        size={fontSize || 24}
                         color={color || "#000"}
                         name={name}
                     />

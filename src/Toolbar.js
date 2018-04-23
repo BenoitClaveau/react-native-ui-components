@@ -21,33 +21,34 @@ class Toolbar extends PureComponent {
         return (
             <View style={styles.container}>
                 <View style={styles.left}>
-                    { renderLeftComponent}
+                    { renderLeftComponent }
                 </View>
                 <View style={styles.center}>
-                    { renderCenterComponent}
+                    { renderCenterComponent }
                 </View>
                 <View style={styles.right}>
-                    { renderRightComponent}
+                    { renderRightComponent }
                 </View>
             </View>
         )
     }
 
     renderLeftComponent() {
-        const {
-            goBack,
-        } = this.props;
-
-        return (
-            <Icon
-                onPress={goBack}
-                name="md-arrow-back"
-                style={styles.back}
-            />
-        );
+        if (this.props.goBack) return this.renderGoBackComponent();
+        return null;
     }
 
     renderCenterComponent() {
+        if (this.props.title) return this.renderTitleComponent();
+        return null;
+    }
+
+    renderRightComponent() {
+        if (this.props.close) return this.renderCloseComponent();
+        return null;
+    }
+
+    renderTitleComponent() {
         const {
             title,
         } = this.props;
@@ -57,14 +58,29 @@ class Toolbar extends PureComponent {
         );
     }
 
-    renderRightComponent() {
+    renderGoBackComponent() {
         const {
-            clear,
+            goBack,
         } = this.props;
 
         return (
             <Icon
-                onPress={clear}
+                style={styles.icon}
+                onPress={goBack}
+                name="md-arrow-back"
+            />
+        );
+    }
+
+    renderCloseComponent() {
+        const {
+            close,
+        } = this.props;
+
+        return (
+            <Icon
+                style={styles.icon}
+                onPress={close}
                 name="md-close"
             />
         );
@@ -99,36 +115,49 @@ export function createStyleSheet() {
         left: {
             flexDirection: "row",
             alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: "blue",
             ...Platform.select({
                 ios: {
                     width: 70,
+                    height: 44,
                 },
                 android: {
-                    width: 56,
+                    width: 70,
+                    height: 56,
                 }
             })
         },
         center: {
             flexDirection: "row",
             alignItems: 'center',
+            backgroundColor: "black",
+            flexGrow: 1,
+            flexShrink: 1,
             ...Platform.select({
                 ios: {
-                    justifyContent: "center"
+                    justifyContent: "center",
+                    height: 44,
                 },
                 android: {
-                    justifyContent: "flex-start"
+                    justifyContent: "flex-start",
+                    height: 56,
                 }
             })
         },
         right: {
             flexDirection: "row",
             alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: "yellow",
             ...Platform.select({
                 ios: {
                     width: 70,
+                    height: 44,
                 },
                 android: {
                     width: 56,
+                    height: 56,
                 }
             })
         },
@@ -137,6 +166,20 @@ export function createStyleSheet() {
             color: theme.PRIMARY_COLOR,
             fontWeight: "600",
         },
+        icon: {
+            alignItems: 'center',
+            justifyContent: 'center',
+            ...Platform.select({
+                ios: {
+                    width: 44,
+                    height: 44,
+                },
+                android: {
+                    width: 56,
+                    height: 56,
+                }
+            })
+        }
     });
 };
 

@@ -8,12 +8,6 @@ import theme from "./Theme";
 
 class MyTextInput extends PureComponent {
 
-    static getDerivedStateFromProps(props, state) {
-        return {
-            maxHeight: props.maxHeight || 48,
-        }
-    }
-
     state = {
         height: 22
     }
@@ -29,7 +23,7 @@ class MyTextInput extends PureComponent {
                     this.setState({ height: event.nativeEvent.contentSize.height })
                 }}
                 {...others}
-                style={[styles.input, style, { height: Math.max(maxHeight, height) }]}
+                style={[styles.input, style]}
             />
         );
     }
@@ -46,6 +40,7 @@ export function createStyleSheet() {
             fontSize: theme.INPUT_FONT_SIZE,
             color: theme.PRIMARY_COLOR,
             fontWeight: "600",
+            height: 56,
         },
     });
 };

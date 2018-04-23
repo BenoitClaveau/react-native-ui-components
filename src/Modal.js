@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import {
-    View,
     Modal,
 } from 'react-native';
 import Toolbar from './Toolbar';
@@ -32,22 +31,20 @@ class MyModal extends PureComponent {
         } = this.props;
 
         return (
-            <View>
-                <Modal
-                    animationType={"fade"}
-                    transparent={false}
-                    visible={this.state.modalVisible}
-                    onRequestClose={() => this.close()}
-                >
-                    <SafeAreaView>
-                        <Toolbar
-                            {...others}
-                            goBack={() => this.close()}
-                        />
-                        {children}
-                    </SafeAreaView>
-                </Modal>
-            </View>
+            <Modal
+                animationType={"fade"}
+                transparent={false}
+                visible={this.state.modalVisible}
+                onRequestClose={() => this.close()}
+            >
+                <SafeAreaView>
+                    <Toolbar
+                        {...others}
+                        close={() => this.close()}
+                    />
+                    {children}
+                </SafeAreaView>
+            </Modal>
         )
     }
 };
