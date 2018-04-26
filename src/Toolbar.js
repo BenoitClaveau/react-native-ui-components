@@ -8,11 +8,7 @@ import {
 import Button from './Button';
 import Icon from './Icon';
 import TextInput from './TextInput';
-import {
-    TOOLBAR_BACKGROUND_COLOR,
-    TITLE_FONT_SIZE,
-    PRIMARY_COLOR
-} from './theme';
+import theme from "./Theme";
 
 class Toolbar extends PureComponent {
 
@@ -25,33 +21,34 @@ class Toolbar extends PureComponent {
         return (
             <View style={styles.container}>
                 <View style={styles.left}>
-                    { renderLeftComponent}
+                    { renderLeftComponent }
                 </View>
                 <View style={styles.center}>
-                    { renderCenterComponent}
+                    { renderCenterComponent }
                 </View>
                 <View style={styles.right}>
-                    { renderRightComponent}
+                    { renderRightComponent }
                 </View>
             </View>
         )
     }
 
     renderLeftComponent() {
-        const {
-            goBack,
-        } = this.props;
-
-        return (
-            <Icon
-                onPress={goBack}
-                name="md-arrow-back"
-                style={styles.back}
-            />
-        );
+        if (this.props.goBack) return this.renderGoBackComponent();
+        return null;
     }
 
     renderCenterComponent() {
+        if (this.props.title) return this.renderTitleComponent();
+        return null;
+    }
+
+    renderRightComponent() {
+        if (this.props.close) return this.renderCloseComponent();
+        return null;
+    }
+
+    renderTitleComponent() {
         const {
             title,
         } = this.props;
@@ -61,84 +58,129 @@ class Toolbar extends PureComponent {
         );
     }
 
-    renderRightComponent() {
+    renderGoBackComponent() {
         const {
-            clear,
+            goBack,
         } = this.props;
 
         return (
             <Icon
-                onPress={clear}
+                style={styles.icon}
+                onPress={goBack}
+                name="md-arrow-back"
+            />
+        );
+    }
+
+    renderCloseComponent() {
+        const {
+            close,
+        } = this.props;
+
+        return (
+            <Icon
+                style={styles.icon}
+                onPress={close}
                 name="md-close"
             />
         );
     }
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "flex-start",
-        backgroundColor: "red",
-        ...Platform.select({
-            ios: {
-                height: 44,
-                paddingTop: 20,
+let styles = {};
+export function createStyleSheet() {
+    styles = StyleSheet.create({
+        container: {
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "flex-start",
+            backgroundColor: "red",
+            ...Platform.select({
+                ios: {
+                    height: 44,
+                    paddingTop: 20,
+                },
+                android: {
+                    height: 56,
+                    paddingTop: 0,
+                }
+            }),
+            shadowOpacity: 0.1,
+            shadowRadius: StyleSheet.hairlineWidth,
+            shadowOffset: {
+                height: StyleSheet.hairlineWidth,
             },
-            android: {
-                height: 56,
-                paddingTop: 0,
-            }
-        }),
-        shadowOpacity: 0.1,
-        shadowRadius: StyleSheet.hairlineWidth,
-        shadowOffset: {
-            height: StyleSheet.hairlineWidth,
+            elevation: 4,
         },
-        elevation: 4,
-    },
-    left: {
-        flexDirection: "row",
-        alignItems: 'center',
-        ...Platform.select({
-            ios: {
-                width: 70,
-            },
-            android: {
-                width: 56,
-            }
-        })
-    },
-    center: {
-        flexDirection: "row",
-        alignItems: 'center',
-        ...Platform.select({
-            ios: {
-                justifyContent: "center"
-            },
-            android: {
-                justifyContent: "flex-start"
-            }
-        })
-    },
-    right: {
-        flexDirection: "row",
-        alignItems: 'center',
-        ...Platform.select({
-            ios: {
-                width: 70,
-            },
-            android: {
-                width: 56,
-            }
-        })
-    },
-    title: {
-        fontSize: TITLE_FONT_SIZE,
-        color: PRIMARY_COLOR,
-        fontWeight: "600",
-    },
-});
+        left: {
+            flexDirection: "row",
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: "blue",
+            ...Platform.select({
+                ios: {
+                    width: 70,
+                    height: 44,
+                },
+                android: {
+                    width: 70,
+                    height: 56,
+                }
+            })
+        },
+        center: {
+            flexDirection: "row",
+            alignItems: 'center',
+            backgroundColor: "black",
+            flexGrow: 1,
+            flexShrink: 1,
+            ...Platform.select({
+                ios: {
+                    justifyContent: "center",
+                    height: 44,
+                },
+                android: {
+                    justifyContent: "flex-start",
+                    height: 56,
+                }
+            })
+        },
+        right: {
+            flexDirection: "row",
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: "yellow",
+            ...Platform.select({
+                ios: {
+                    width: 70,
+                    height: 44,
+                },
+                android: {
+                    width: 56,
+                    height: 56,
+                }
+            })
+        },
+        title: {
+            fontSize: theme.TITLE_FONT_SIZE,
+            color: theme.PRIMARY_COLOR,
+            fontWeight: "600",
+        },
+        icon: {
+            alignItems: 'center',
+            justifyContent: 'center',
+            ...Platform.select({
+                ios: {
+                    width: 44,
+                    height: 44,
+                },
+                android: {
+                    width: 56,
+                    height: 56,
+                }
+            })
+        }
+    });
+};
 
 export default Toolbar;

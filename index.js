@@ -1,3 +1,33 @@
+import { customize as customizeTheme } from './src/Theme';
+import { createStyleSheet as createStyleSheetButton } from './src/Button';
+import { createStyleSheet as createStyleSheetColumn } from './src/Column';
+import { createStyleSheet as createStyleSheetGroup } from './src/Group';
+import { createStyleSheet as createStyleSheetPicture } from './src/Picture';
+import { createStyleSheet as createStyleSheetRow } from './src/Row';
+import { createStyleSheet as createStyleSheetSafeAreaView } from './src/SafeAreaView';
+import { createStyleSheet as createStyleSheetText } from './src/Text';
+import { createStyleSheet as createStyleSheetTextEditor } from './src/TextEditor';
+import { createStyleSheet as createStyleSheetTextInput } from './src/TextInput';
+import { createStyleSheet as createStyleSheetTitle } from './src/Title';
+import { createStyleSheet as createStyleSheetToolbar } from './src/Toolbar';
+
+
+export function customize(options) {
+    customizeTheme(options);
+    createStyleSheetButton();
+    createStyleSheetColumn();
+    createStyleSheetGroup();
+    createStyleSheetPicture();
+    createStyleSheetRow();
+    createStyleSheetSafeAreaView();
+    createStyleSheetText();
+    createStyleSheetTextEditor();
+    createStyleSheetTextInput();
+    createStyleSheetTitle();
+    createStyleSheetToolbar();
+}
+
+export { default as Theme } from './src/Theme';
 export { default as Button } from './src/Button';
 export { default as Modal } from './src/Modal';
 export { default as ComboBox } from './src/ComboBox';
@@ -15,5 +45,4 @@ export { default as Column } from './src/Column';
 export { default as Dialog } from './src/Dialog';
 export { default as TextEditor } from './src/TextEditor';
 export { default as SafeAreaView } from './src/SafeAreaView';
-export { default as theme } from './src/theme';
-export { customize } from './src/theme';
+export { default as ThemeProvider } from './src/ThemeProvider';

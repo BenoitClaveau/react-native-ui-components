@@ -45,12 +45,15 @@ class Picture extends PureComponent {
     }
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center"
-    }
-});
+let styles = {};
+export function createStyleSheet() {
+    styles = StyleSheet.create({
+        container: {
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center"
+        }
+    });
+}
 
 export default Picture;

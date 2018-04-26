@@ -24,12 +24,15 @@ class Column extends PureComponent {
     }
 };
 
-const styles = StyleSheet.create({
-    column: {
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "flex-start",
-    }
-});
+let styles = {};
+export function createStyleSheet() {
+    styles = StyleSheet.create({
+        column: {
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "flex-start",
+        }
+    });
+};
 
 export default Column;

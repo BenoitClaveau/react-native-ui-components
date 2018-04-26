@@ -9,14 +9,29 @@ import Modal from './Modal';
 
 class ComboBox extends PureComponent {
 
+    constructor(props) {
+        super(props);
+        if (!props.onSelect) throw new Error("onSelect is not defined.");
+    }
+
     open() {
         return this.refs.modal.open();
+    }
+
+    close() {
+        return this.refs.modal.close();
+    }
+
+    onSelect(...args) {
+        this.props.onSelect(...args);
+        this.close();
     }
 
     render() {
         const {
             title,
             renderPlaceholder,
+            onSelect,
             ...others
         } = this.props;
 
@@ -30,6 +45,7 @@ class ComboBox extends PureComponent {
                     title={title}
                 >
                     <Select
+                        onSelect={(...args) => this.onSelect(...args)}
                         {...others}
                     />
                 </Modal>

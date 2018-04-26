@@ -27,10 +27,13 @@ class Group extends PureComponent {
     }
 };
 
-const styles = StyleSheet.create({
-    container: {
-        padding: 16,
-    }
-});
+let styles = {};
+    export function createStyleSheet() {
+        styles = StyleSheet.create({
+        container: {
+            padding: 16,
+        }
+    });
+};
 
 export default Group;

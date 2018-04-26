@@ -2,7 +2,7 @@ import { PixelRatio } from 'react-native';
 
 const fontScale = PixelRatio.getFontScale();
 
-let theme = {
+const theme = {
     PRIMARY_COLOR: "#921863",
     INACTIVE_PRIMARY_COLOR: "#AAA",
     ACCENT_COLOR: "#0080FF",
@@ -16,9 +16,8 @@ let theme = {
     ICON_FONT_SIZE: 28 * fontScale,
 }
 
-export function customize(options) {
-    theme = { ...theme, ...options };
-}
-
 export default theme;
 
+export function customize(options) {
+    Object.assign(theme, options);
+}
