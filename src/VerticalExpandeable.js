@@ -12,12 +12,16 @@ class VerticalExpandeable extends PureComponent {
     };
 
     translateY = new Animated.Value(0);
-    
+
     panResponder = PanResponder.create({
         onStartShouldSetPanResponder: (evt, gestureState) => true,
-        onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+        onStartShouldSetPanResponderCapture: (evt, gestureState) => {
+            return Math.abs(gestureState.dx) >= 2 || Math.abs(gestureState.dy) >= 2;
+        },
         onMoveShouldSetPanResponder: (evt, gestureState) => true,
-        onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
+        onMoveShouldSetPanResponderCapture: (evt, gestureState) => {
+            return Math.abs(gestureState.dx) >= 2 || Math.abs(gestureState.dy) >= 2;
+        },
         onPanResponderGrant: (evt, gestureState) => true,
         onPanResponderMove: Animated.event([null, { dy: this.translateY }]),
         onPanResponderRelease: (e, gestureState) => {
@@ -62,14 +66,14 @@ class VerticalExpandeable extends PureComponent {
 
         return (
             <Animated.View
-                style={[
-                    style, {
-                        height: this.translateY.interpolate({
-                            inputRange: [0, openedHeight],
-                            outputRange: [closedHeight, openedHeight],
-                            extrapolate: 'clamp',
-                        }),
-                    }]}
+                style={[{
+                    backgroundColor: "transparent", //Si je supprime la background panResponder n'attrape plus les évenements !
+                    height: this.translateY.interpolate({
+                        inputRange: [0, openedHeight],
+                        outputRange: [closedHeight, openedHeight],
+                        extrapolate: 'clamp',
+                    }),
+                }, style]}
                 {...this.panResponder.panHandlers}
             >
                 {children}
