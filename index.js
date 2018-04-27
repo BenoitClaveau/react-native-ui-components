@@ -11,7 +11,6 @@ import { createStyleSheet as createStyleSheetTextInput } from './src/TextInput';
 import { createStyleSheet as createStyleSheetTitle } from './src/Title';
 import { createStyleSheet as createStyleSheetToolbar } from './src/Toolbar';
 
-
 export function customize(options) {
     customizeTheme(options);
     createStyleSheetButton();
