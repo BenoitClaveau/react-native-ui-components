@@ -27,24 +27,46 @@ class ComboBox extends PureComponent {
         this.close();
     }
 
+    scrollToIndex(params) {
+        this.refs.select.scrollToIndex(params);
+    }
+
+    scrollToItem(params) {
+        this.refs.select.scrollToItem(params);
+    }
+
+    scrollToOffset(params) {
+        this.refs.select.scrollToOffset(params);
+    }
+
+    flashScrollIndicators() {
+        this.refs.select.flashScrollIndicators();
+    }
+
     render() {
+
         const {
             title,
             renderPlaceholder,
             onSelect,
+            onOpen,
+            onClose,
             ...others
         } = this.props;
 
-        if (!renderPlaceholder) throw new Error(" renderPlaceholder is not defined.");
+        if (!renderPlaceholder) throw new Error("renderPlaceholder is not defined.");
         const placeholder = renderPlaceholder();
 
         return (
             <View>
                 <Modal
                     ref={"modal"}
-                    title={title}
+                    title
+                    onOpen={(...args) => onOpen && onOpen(...args)}
+                    onClose={(...args) => onClose && onClose(...args)}
                 >
                     <Select
+                        ref={"select"}
                         onSelect={(...args) => this.onSelect(...args)}
                         {...others}
                     />

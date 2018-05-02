@@ -13,6 +13,22 @@ class Select extends PureComponent {
         if (!props.onSelect) throw new Error("onSelect is not defined.");
     }
 
+    scrollToIndex(params) {
+        this.refs.flatlist.scrollToIndex(params);
+    }
+
+    scrollToItem(params) {
+        this.refs.flatlist.scrollToItem(params);
+    }
+
+    scrollToOffset(params) {
+        this.refs.flatlist.scrollToOffset(params);
+    }
+
+    flashScrollIndicators() {
+        this.refs.flatlist.flashScrollIndicators();
+    }
+
     render() {
 
         const {
@@ -21,18 +37,20 @@ class Select extends PureComponent {
             ...others
         } = this.props;
 
+        console.log("SELECT RENDER", this.props.data.length);
         return (
             <FlatList
+                ref="flatlist"
                 keyboardShouldPersistTaps="always"
                 keyboardDismissMode="on-drag"
-                onEndReachedThreshold={1}
+                onEndReachedThreshold={0.5}
                 renderItem={(...args) => {
                     return (
                         <TouchableOpacity
                             underlayColor='transparent'
                             onPress={() => onSelect(...args)}
                         >
-                            {renderItem(...args)}
+                            { renderItem(...args) }
                         </TouchableOpacity>
                     )
                 }}

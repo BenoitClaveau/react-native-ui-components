@@ -13,14 +13,21 @@ class MyModal extends PureComponent {
 
     open() {
         const { onOpen } = this.props;
-        this.setState({ modalVisible: true });
-        onOpen && onOpen();
+        this.setState({ 
+            modalVisible: true
+        }, () => {
+            console.log("ONOPEN", onOpen)
+            onOpen && onOpen();
+        });
     }
 
     close() {
         const { onClose } = this.props;
-        this.setState({ modalVisible: false });
-        onClose && onClose();
+        this.setState({ 
+            modalVisible: false
+        }, () => {
+            onClose && onClose();
+        });
     }
 
     render() {
