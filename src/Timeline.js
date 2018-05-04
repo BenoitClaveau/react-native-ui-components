@@ -8,9 +8,7 @@ import {
 } from "react-native";
 import debounce from 'debounce';
 
-import { computeWindowedRenderLimits } from "react-native/Libraries/Lists/VirtualizeUtils";
-
-class VirutalRange extends PureComponent {
+class Timeline extends PureComponent {
 
     static defaultProps = {
         ...VirtualizedList.defaultProps,
@@ -198,8 +196,11 @@ class VirutalRange extends PureComponent {
                     } = this.props;
 
                     const { contentLength, visibleLength, offset, dOffset } = this.refs.flatlist._getScrollMetrics();
+                    console.log("onMomentumScrollEnd", dOffset)
                     if (dOffset >= 0) {
                         const distanceFromEnd = contentLength - visibleLength - offset;
+
+                        console.log("distanceFromEnd", distanceFromEnd, "midOffset", this.midOffset, "itemLength", itemLength)
                         if (
                             distanceFromEnd < onEndReachedThreshold * visibleLength
                         ) {
@@ -212,6 +213,7 @@ class VirutalRange extends PureComponent {
                     }
                     else {
                         const distanceFromStart = offset;
+                        console.log("distanceFromStart", distanceFromStart, "midOffset", this.midOffset, "itemLength", itemLength)
                         if (
                             distanceFromStart < onStartReachedThreshold * visibleLength
                         ) {
@@ -228,4 +230,4 @@ class VirutalRange extends PureComponent {
     }
 }
 
-export default VirutalRange;
+export default Timeline;

@@ -4,6 +4,7 @@ import {
     FlatList,
     TouchableOpacity,
 } from 'react-native';
+import Timeline from './Timeline';
 
 class Select extends PureComponent {
 
@@ -34,28 +35,46 @@ class Select extends PureComponent {
         const {
             onSelect,
             renderItem,
+            timeline,
             ...others
         } = this.props;
 
-        return (
-            <FlatList
-                ref="flatlist"
-                keyboardShouldPersistTaps="always"
-                keyboardDismissMode="on-drag"
-                onEndReachedThreshold={0.5}
-                renderItem={(...args) => {
-                    return (
-                        <TouchableOpacity
-                            underlayColor='transparent'
-                            onPress={() => onSelect(...args)}
-                        >
-                            { renderItem(...args) }
-                        </TouchableOpacity>
-                    )
-                }}
-                {...others}
-            />
-        );
+        if (timeline) {
+            return (
+                <Timeline
+                    ref="flatlist"
+                    renderItem={(...args) => {
+                        return (
+                            <TouchableOpacity
+                                underlayColor='transparent'
+                                onPress={() => onSelect(...args)}
+                            >
+                                {renderItem(...args)}
+                            </TouchableOpacity>
+                        )
+                    }}
+                    {...others}
+                />
+            );
+        }
+        else {
+            return (
+                <FlatList
+                    ref="flatlist"
+                    renderItem={(...args) => {
+                        return (
+                            <TouchableOpacity
+                                underlayColor='transparent'
+                                onPress={() => onSelect(...args)}
+                            >
+                                {renderItem(...args)}
+                            </TouchableOpacity>
+                        )
+                    }}
+                    {...others}
+                />
+            );
+        }
     }
 }
 

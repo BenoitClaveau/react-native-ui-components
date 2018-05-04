@@ -59,6 +59,7 @@ class ComboBox extends PureComponent {
             renderPlaceholder,
             onSelect,
             renderLeftComponent,
+            timeline,
             ...others
         } = this.props;
 
@@ -77,6 +78,7 @@ class ComboBox extends PureComponent {
                     <Select
                         ref={"select"}
                         onSelect={(...args) => this.onSelect(...args)}
+                        timeline={timeline}
                         {...others}
                     />
                 </Modal>
