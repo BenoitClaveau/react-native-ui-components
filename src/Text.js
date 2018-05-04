@@ -10,7 +10,11 @@ import theme from "./Theme";
 class MyText extends PureComponent {
 
     render() {
-        const { style, children } = this.props;
+        const { 
+            style, 
+            children
+        } = this.props;
+        
         return (
             <Text style={[styles.text, style]}>{children}</Text>
         )

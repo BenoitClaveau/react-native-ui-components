@@ -37,7 +37,6 @@ class Select extends PureComponent {
             ...others
         } = this.props;
 
-        console.log("SELECT RENDER", this.props.data.length);
         return (
             <FlatList
                 ref="flatlist"

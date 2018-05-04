@@ -43,6 +43,7 @@ export { default as Row } from './src/Row';
 export { default as Column } from './src/Column';
 export { default as Dialog } from './src/Dialog';
 export { default as TextEditor } from './src/TextEditor';
+export { default as VirutalRange } from './src/VirutalRange';
 export { default as VerticalExpandeable } from './src/VerticalExpandeable';
 export { default as SafeAreaView } from './src/SafeAreaView';
 export { default as ThemeProvider } from './src/ThemeProvider';

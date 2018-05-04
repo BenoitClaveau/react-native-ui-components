@@ -20,7 +20,6 @@ class MyDatePicker extends PureComponent {
     state = {
     }
 
-
     render() {
 
         const { onDateChange } = this.props;

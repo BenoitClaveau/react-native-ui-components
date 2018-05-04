@@ -14,37 +14,22 @@ class VerticalExpandeable extends PureComponent {
     translateY = new Animated.Value(0);
 
     panResponder = PanResponder.create({
-        onStartShouldSetPanResponder: (evt, gestureState) => true,
-        onStartShouldSetPanResponderCapture: (evt, gestureState) => {
-            return Math.abs(gestureState.dx) >= 2 || Math.abs(gestureState.dy) >= 2;
+        onStartShouldSetPanResponder: (evt, gestureState) => false,
+        onStartShouldSetPanResponderCapture: (evt, gestureState) => false,
+        onMoveShouldSetPanResponder: (evt, gestureState) => {
+            return Math.abs(gestureState.dx) >= 5 || Math.abs(gestureState.dy) >= 5;
         },
-        onMoveShouldSetPanResponder: (evt, gestureState) => true,
         onMoveShouldSetPanResponderCapture: (evt, gestureState) => {
-            return Math.abs(gestureState.dx) >= 2 || Math.abs(gestureState.dy) >= 2;
+            return Math.abs(gestureState.dx) >= 5 || Math.abs(gestureState.dy) >= 5;
         },
         onPanResponderGrant: (evt, gestureState) => true,
         onPanResponderMove: Animated.event([null, { dy: this.translateY }]),
         onPanResponderRelease: (e, gestureState) => {
-            const {
-                closedHeight,
-                openedHeight,
-            } = this.props;
-
-            if (Math.abs(gestureState.dy) < 2) {    //on reviens à la position initiale
-                Animated.timing(this.translateY, {
-                    toValue: this.state.opened ? openedHeight : 0,    //on determine si c'est ouvert ou fermé
-                    duration: 500
-                }).start();
-                this.translateY.setOffset(this.state.opened ? openedHeight : 0);
+            if (Math.abs(gestureState.dy) < 5) {    //on reviens à la position initiale
+                this.state.opened ? this.open() : this.close();
             }
             else {
-                this.setState({ opened: gestureState.vy >= 0 }, () => {
-                    Animated.timing(this.translateY, {  //on ouvre ou on ferme
-                        toValue: this.state.opened ? openedHeight : 0,
-                        duration: 500
-                    }).start();
-                    this.translateY.setOffset(this.state.opened ? openedHeight : 0);
-                });
+                gestureState.vy >= 0 ? this.open() : this.close();
             }
         }
     });
@@ -53,6 +38,42 @@ class VerticalExpandeable extends PureComponent {
         super(props);
         this.translateY.addListener((...args) => {
             this.props.onTranslateY && this.props.onTranslateY(...args);
+        });
+    }
+
+    isOpen() {
+        return this.state.opened;
+    }
+
+    async close() {
+        return await new Promise((resolve, reject) => {
+            this.setState({ opened: false }, () => {
+                Animated.timing(this.translateY, {
+                    toValue: 0,
+                    duration: 500
+                }).start(() => {
+                    this.translateY.setOffset(0);
+                    resolve();
+                });
+            });
+        });
+    }
+
+    async open() {
+        const {
+            openedHeight,
+        } = this.props;
+
+        return await new Promise((resolve, reject) => {
+            this.setState({ opened: true }, () => {
+                Animated.timing(this.translateY, {
+                    toValue: openedHeight,
+                    duration: 500
+                }).start(() => {
+                    this.translateY.setOffset(openedHeight);
+                    resolve();
+                });
+            });
         });
     }
 

@@ -17,7 +17,11 @@ class TextEditor extends PureComponent {
     }
 
     render() {
-        const { title, style, ...others } = this.props;
+        const {
+            title, 
+            style, 
+            ...others
+        } = this.props;
 
         return (
             <Modal>

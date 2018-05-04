@@ -15,12 +15,13 @@ class AutoComplete extends PureComponent {
 
     onChange(text) {
         if (!text) text = null;
-        this.setState({ q: text });
-        this.debounceFetch();
+        this.setState({ q: text }, () => {
+            this.debounceFetch();
+        })
     }
 
-    debounceFetch = debounce(() => {
-        this.props.fetch(this.state.q)
+    debounceFetch = debounce(async () => {
+        await this.props.fetch(this.state.q)
     }, 150)
 
     render() {

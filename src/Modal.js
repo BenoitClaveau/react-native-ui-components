@@ -11,22 +11,27 @@ class MyModal extends PureComponent {
         modalVisible: false,
     }
 
-    open() {
+    async open() {
         const { onOpen } = this.props;
-        this.setState({ 
-            modalVisible: true
-        }, () => {
-            console.log("ONOPEN", onOpen)
-            onOpen && onOpen();
+        return await new Promise((resolve, reject) => {
+            this.setState({
+                modalVisible: true
+            }, () => {
+                onOpen && onOpen();
+                resolve();
+            });
         });
     }
 
-    close() {
+    async close() {
         const { onClose } = this.props;
-        this.setState({ 
-            modalVisible: false
-        }, () => {
-            onClose && onClose();
+        return await new Promise((resolve, reject) => {
+            this.setState({
+                modalVisible: false
+            }, () => {
+                onClose && onClose();
+                resolve();
+            });
         });
     }
 

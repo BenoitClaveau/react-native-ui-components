@@ -17,8 +17,6 @@ class MyTextInput extends PureComponent {
             ...others 
         } = this.props;
 
-        console.log(others)
-
         return (
             <TextInput
                 style={[styles.input, style]}

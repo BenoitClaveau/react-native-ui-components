@@ -2,8 +2,8 @@ import { Alert } from 'react-native';
 
 class Dialog {
 
-    alert(message, title) {
-        return new Promise((resolve, reject) => {
+    async alert(message, title) {
+        return await new Promise((resolve, reject) => {
             Alert.alert(
                 title || "Information",
                 message,
@@ -19,8 +19,8 @@ class Dialog {
         });
     }
 
-    confirm(message, title) {
-        return new Promise((resolve, reject) => {
+    async confirm(message, title) {
+        return await new Promise((resolve, reject) => {
             Alert.alert(
                 title || "Confirmation",
                 message,

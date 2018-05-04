@@ -5,7 +5,6 @@ class ThemeProvider extends PureComponent {
   
   constructor(props) {
     super(props);
-    console.log("customize")
     customize(props.customize)
   }
 

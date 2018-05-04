@@ -9,9 +9,15 @@ import {
 class Group extends PureComponent {
 
     render() {
-        let { children, containerStyle } = this.props;
+        let { 
+            children,
+            containerStyle
+        } = this.props;
+        
         if (!Array.isArray(children)) children = [children];
+        
         const last = Math.max(children.length, 0) - 1;
+        
         return (
             <View style={[group.container, containerStyle]}>
                 {children.map((child, index) => {

@@ -3,6 +3,7 @@ import {
     View,
     TouchableOpacity,
     Text,
+    InteractionManager,
 } from 'react-native';
 import Select from './Select';
 import Modal from './Modal';
@@ -18,13 +19,21 @@ class ComboBox extends PureComponent {
         return this.refs.modal.open();
     }
 
-    close() {
-        return this.refs.modal.close();
+    onOpen(...args) {
+        this.props.onOpen && this.onOpen.onClose(...args);
     }
 
-    onSelect(...args) {
+    async close() {
+        return await this.refs.modal.close();
+    }
+
+    onClose(...args) {
+        this.props.onClose && this.props.onClose(...args);
+    }
+
+    async onSelect(...args) {
+        await this.close();
         this.props.onSelect(...args);
-        this.close();
     }
 
     scrollToIndex(params) {
@@ -49,8 +58,7 @@ class ComboBox extends PureComponent {
             title,
             renderPlaceholder,
             onSelect,
-            onOpen,
-            onClose,
+            renderLeftComponent,
             ...others
         } = this.props;
 
@@ -62,8 +70,9 @@ class ComboBox extends PureComponent {
                 <Modal
                     ref={"modal"}
                     title
-                    onOpen={(...args) => onOpen && onOpen(...args)}
-                    onClose={(...args) => onClose && onClose(...args)}
+                    onOpen={(...args) => this.onOpen(...args)}
+                    onClose={(...args) => this.onClose(...args)}
+                    renderLeftComponent={(...args) => renderLeftComponent && renderLeftComponent(...args)}
                 >
                     <Select
                         ref={"select"}

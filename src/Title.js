@@ -10,7 +10,13 @@ import theme from "./Theme";
 class Title extends PureComponent {
 
     render() {
-        const { name, onPress, style, children } = this.props;
+        const { 
+            name, 
+            onPress, 
+            style, 
+            children
+        } = this.props;
+        
         if (onPress) {
             return (
                 <TouchableOpacity style={[styles.container, style]}>
