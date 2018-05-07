@@ -13,7 +13,7 @@ class Timeline extends PureComponent {
     static defaultProps = {
         ...VirtualizedList.defaultProps,
         numColumns: 1,
-        debounceInterval: 350,
+        debounceInterval: 750,
     };
 
     constructor(props) {
@@ -45,6 +45,18 @@ class Timeline extends PureComponent {
 
     scrollToOffset(params) {
         this.refs.flatlist.scrollToOffset(params);
+    }
+
+    scrollToIndex(params) {
+        this.refs.flatlist.scrollToIndex(params);
+    }
+
+    scrollToItem(params) {
+        this.refs.flatlist.scrollToItem(params);
+    }
+
+    scrollToEnd(params) {
+        this.refs.flatlist.scrollToEnd(params);
     }
 
     _pushMultiColumnViewable(arr, v) {
@@ -125,9 +137,9 @@ class Timeline extends PureComponent {
         if (this._onStartReached || this._onEndReached) {
             this._onStartReached = false; //scroll needed
             this._onEndReached = false; //scroll needed
-            this.refs.flatlist.scrollToOffset({ offset: this.midOffset, animated: false });
+            const offset = this.props.scrollOffset ?  this.midOffset - this.props.scrollOffset : this.midOffset;
+            this.refs.flatlist.scrollToOffset({ offset, animated: false });
         }
-        
     }
 
     onStartReached = debounce(async (...args) => {
@@ -175,14 +187,13 @@ class Timeline extends PureComponent {
         } = this.props;
 
         const onStartReachedThreshold = (this.windowLength / itemLength) * this.mid;
-
+        
         return (
             <VirtualizedList
                 {...others}
                 ref="flatlist"
                 horizontal={horizontal}
                 initialScrollIndex={this.mid}
-                onEndReachedThreshold={onStartReachedThreshold}
                 renderItem={this._renderItem}
                 getItem={this._getItem}
                 getItemCount={this._getItemCount}
@@ -190,38 +201,50 @@ class Timeline extends PureComponent {
                     return { length: itemLength, offset: itemLength * index, index }
                 }}
                 viewabilityConfigCallbackPairs={this._virtualizedListPairs}
+                onMomentumScrollBegin={({ nativeEvent }) => {
+                    this.scrollPosition = horizontal ? nativeEvent.contentOffset.x : nativeEvent.contentOffset.y;
+                }}
                 onMomentumScrollEnd={({ nativeEvent }) => {
                     const {
                         itemLength
                     } = this.props;
 
-                    const { contentLength, visibleLength, offset, dOffset } = this.refs.flatlist._getScrollMetrics();
-                    console.log("onMomentumScrollEnd", dOffset)
-                    if (dOffset >= 0) {
-                        const distanceFromEnd = contentLength - visibleLength - offset;
+                    const scrollPosition = horizontal ? nativeEvent.contentOffset.x : nativeEvent.contentOffset.y;
+                    const way = scrollPosition - this.scrollPosition;
 
-                        console.log("distanceFromEnd", distanceFromEnd, "midOffset", this.midOffset, "itemLength", itemLength)
+                    const { contentLength, visibleLength, offset, dOffset } = this.refs.flatlist._getScrollMetrics();
+                    if (way >= 0) {
+                        const distanceFromEnd = contentLength - visibleLength - offset;
+                        const distanceFromStart = offset;
+
                         if (
-                            distanceFromEnd < onEndReachedThreshold * visibleLength
+                            distanceFromEnd < onStartReachedThreshold * visibleLength
                         ) {
                             this._onEndReached = true;
                             this.onStartReached.clear();
                             this.onEndReached.clear();
-                            const splicedItems = (this.midOffset - distanceFromEnd) / itemLength;
-                            this.onEndReached({ distanceFromEnd, splicedItems });
+                            const midItemOffset = Math.abs(distanceFromStart - this.midOffset);
+                            const slicedItemsWithDecimal = midItemOffset / itemLength;
+                            const slicedItems = Math.floor(slicedItemsWithDecimal);
+                            const scrollOffset = -(slicedItemsWithDecimal - slicedItems) * itemLength;
+                            this.onEndReached({ distanceFromEnd, slicedItems, scrollOffset });
                         }
                     }
                     else {
                         const distanceFromStart = offset;
-                        console.log("distanceFromStart", distanceFromStart, "midOffset", this.midOffset, "itemLength", itemLength)
+
                         if (
                             distanceFromStart < onStartReachedThreshold * visibleLength
                         ) {
                             this._onStartReached = true;
                             this.onStartReached.clear();
                             this.onEndReached.clear();
-                            const splicedItems = (this.midOffset - distanceFromStart) / itemLength;
-                            this.onStartReached({ distanceFromStart, splicedItems });
+
+                            const midItemOffset = Math.abs(distanceFromStart - this.midOffset)
+                            const slicedItemsWithDecimal = midItemOffset / itemLength;
+                            const slicedItems = Math.floor(slicedItemsWithDecimal);
+                            const scrollOffset = (slicedItemsWithDecimal - slicedItems) * itemLength;
+                            this.onStartReached({ distanceFromStart, slicedItems, scrollOffset });
                         }
                     }
                 }}
