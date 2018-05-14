@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import {
     StyleSheet,
     VirtualizedList,
@@ -8,16 +8,24 @@ import {
 } from "react-native";
 import debounce from 'debounce';
 
-class Timeline extends PureComponent {
+class Timeline extends Component {
 
     static defaultProps = {
         ...VirtualizedList.defaultProps,
         numColumns: 1,
-        debounceInterval: 750,
+        debounceInterval: 500,
     };
 
-    constructor(props) {
-        super(props);
+    static getDerivedStateFromProps(nextProps, prevState) {
+        return {
+            data: nextProps.data
+        };
+    }
+
+    state = {};
+
+    constructor(props, state, snapshot) {
+        super(props, state, snapshot);
         if (this.props.viewabilityConfigCallbackPairs) {
             this._virtualizedListPairs = this.props.viewabilityConfigCallbackPairs.map(
                 pair => ({
@@ -133,12 +141,20 @@ class Timeline extends PureComponent {
         return data ? Math.ceil(data.length / this.props.numColumns) : 0;
     };
 
-    componentDidUpdate() {
+    shouldComponentUpdate(nextProps, nextState) {
         if (this._onStartReached || this._onEndReached) {
+            this.refs.flatlist.state.first = this.mid; //reset first withour rendering
+            const offset = nextProps.scrollOffset ? this.midOffset - nextProps.scrollOffset : this.midOffset; //scroll before rendering to limit flickering
+            this.refs.flatlist.scrollToOffset({ offset, animated: false });
+            return true;
+        }
+        else return false;
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this._onStartReached || this._onEndReached) { //reset flags
             this._onStartReached = false; //scroll needed
             this._onEndReached = false; //scroll needed
-            const offset = this.props.scrollOffset ?  this.midOffset - this.props.scrollOffset : this.midOffset;
-            this.refs.flatlist.scrollToOffset({ offset, animated: false });
         }
     }
 
@@ -153,7 +169,7 @@ class Timeline extends PureComponent {
     get mid() {
         const {
             data,
-        } = this.props;
+        } = this.state;
 
         return Math.floor(data.length / 2);
     }
@@ -183,15 +199,20 @@ class Timeline extends PureComponent {
             horizontal,
             onEndReached, //remove
             onEndReachedThreshold, //remove
+            data,
+            onReachedThreshold,
             ...others
         } = this.props;
-
-        const onStartReachedThreshold = (this.windowLength / itemLength) * this.mid;
         
+
+        const onReachedThresholdValue = onReachedThreshold || (this.windowLength / itemLength) * this.mid;
+
         return (
             <VirtualizedList
+                data={this.state.data}
                 {...others}
                 ref="flatlist"
+                scrollEnabled={this.state.scrollEnabled}
                 horizontal={horizontal}
                 initialScrollIndex={this.mid}
                 renderItem={this._renderItem}
@@ -202,6 +223,8 @@ class Timeline extends PureComponent {
                 }}
                 viewabilityConfigCallbackPairs={this._virtualizedListPairs}
                 onMomentumScrollBegin={({ nativeEvent }) => {
+                    this.onStartReached.clear();
+                    this.onEndReached.clear();
                     this.scrollPosition = horizontal ? nativeEvent.contentOffset.x : nativeEvent.contentOffset.y;
                 }}
                 onMomentumScrollEnd={({ nativeEvent }) => {
@@ -212,14 +235,17 @@ class Timeline extends PureComponent {
                     const scrollPosition = horizontal ? nativeEvent.contentOffset.x : nativeEvent.contentOffset.y;
                     const way = scrollPosition - this.scrollPosition;
 
+                    //console.log("WAY", way >= 0 ? "to end" : "to start", "value", way)
                     const { contentLength, visibleLength, offset, dOffset } = this.refs.flatlist._getScrollMetrics();
-                    if (way >= 0) {
-                        const distanceFromEnd = contentLength - visibleLength - offset;
-                        const distanceFromStart = offset;
-
+                    const distanceFromEnd = contentLength - visibleLength - offset;
+                    const distanceFromStart = offset;
+                    //console.log("distanceFromEnd", distanceFromEnd, "distanceFromStart", distanceFromStart, "limit", onReachedThresholdValue * visibleLength, "onReachedThresholdValue", onReachedThresholdValue, "contentLength", contentLength, "visibleLength", visibleLength, "itemLength", itemLength)
+                        
+                    if (way > 0) {
                         if (
-                            distanceFromEnd < onStartReachedThreshold * visibleLength
+                            distanceFromEnd < onReachedThresholdValue * visibleLength
                         ) {
+                            
                             this._onEndReached = true;
                             this.onStartReached.clear();
                             this.onEndReached.clear();
@@ -227,14 +253,14 @@ class Timeline extends PureComponent {
                             const slicedItemsWithDecimal = midItemOffset / itemLength;
                             const slicedItems = Math.floor(slicedItemsWithDecimal);
                             const scrollOffset = -(slicedItemsWithDecimal - slicedItems) * itemLength;
+                            //console.log("onEndReached slicedItems", slicedItems)
                             this.onEndReached({ distanceFromEnd, slicedItems, scrollOffset });
+
                         }
                     }
                     else {
-                        const distanceFromStart = offset;
-
                         if (
-                            distanceFromStart < onStartReachedThreshold * visibleLength
+                            distanceFromStart < onReachedThreshold * visibleLength
                         ) {
                             this._onStartReached = true;
                             this.onStartReached.clear();
@@ -244,6 +270,7 @@ class Timeline extends PureComponent {
                             const slicedItemsWithDecimal = midItemOffset / itemLength;
                             const slicedItems = Math.floor(slicedItemsWithDecimal);
                             const scrollOffset = (slicedItemsWithDecimal - slicedItems) * itemLength;
+                            //console.log("onStartReached slicedItems", slicedItems)
                             this.onStartReached({ distanceFromStart, slicedItems, scrollOffset });
                         }
                     }
