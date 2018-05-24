@@ -24,6 +24,8 @@ class Timeline extends Component {
 
     state = {};
 
+    _virtualizedListPairs = [];
+
     constructor(props, state, snapshot) {
         super(props, state, snapshot);
         if (this.props.viewabilityConfigCallbackPairs) {
@@ -76,22 +78,32 @@ class Timeline extends Component {
         });
     }
 
-    _createOnViewableItemsChanged = (onViewableItemsChanged) => {
-        const { numColumns } = this.props;
-        if (onViewableItemsChanged) {
-            if (numColumns > 1) {
-                const changed = [];
-                const viewableItems = [];
-                info.viewableItems.forEach(v =>
-                    this._pushMultiColumnViewable(viewableItems, v),
-                );
-                info.changed.forEach(v => this._pushMultiColumnViewable(changed, v));
-                onViewableItemsChanged({ viewableItems, changed });
-            } else {
-                onViewableItemsChanged(info);
+    _createOnViewableItemsChanged(
+        onViewableItemsChanged: ?(info: {
+            viewableItems: Array<ViewToken>,
+            changed: Array<ViewToken>,
+        }) => void,
+    ) {
+        return (info: {
+            viewableItems: Array<ViewToken>,
+            changed: Array<ViewToken>,
+        }) => {
+            const { numColumns } = this.props;
+            if (onViewableItemsChanged) {
+                if (numColumns > 1) {
+                    const changed = [];
+                    const viewableItems = [];
+                    info.viewableItems.forEach(v =>
+                        this._pushMultiColumnViewable(viewableItems, v),
+                    );
+                    info.changed.forEach(v => this._pushMultiColumnViewable(changed, v));
+                    onViewableItemsChanged({ viewableItems, changed });
+                } else {
+                    onViewableItemsChanged(info);
+                }
             }
-        }
-    };
+        };
+    }
 
     _renderItem = (info) => {
         const { renderItem, numColumns, columnWrapperStyle, itemWrapperStyle, horizontal, itemLength } = this.props;
@@ -203,7 +215,7 @@ class Timeline extends Component {
             onReachedThreshold,
             ...others
         } = this.props;
-        
+
 
         const onReachedThresholdValue = onReachedThreshold || (this.windowLength / itemLength) * this.mid;
 
@@ -240,12 +252,12 @@ class Timeline extends Component {
                     const distanceFromEnd = contentLength - visibleLength - offset;
                     const distanceFromStart = offset;
                     //console.log("distanceFromEnd", distanceFromEnd, "distanceFromStart", distanceFromStart, "limit", onReachedThresholdValue * visibleLength, "onReachedThresholdValue", onReachedThresholdValue, "contentLength", contentLength, "visibleLength", visibleLength, "itemLength", itemLength)
-                        
+
                     if (way > 0) {
                         if (
                             distanceFromEnd < onReachedThresholdValue * visibleLength
                         ) {
-                            
+
                             this._onEndReached = true;
                             this.onStartReached.clear();
                             this.onEndReached.clear();
