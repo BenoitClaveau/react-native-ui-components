@@ -52,6 +52,10 @@ class ComboBox extends PureComponent {
         this.refs.select.flashScrollIndicators();
     }
 
+    getScrollMetrics() {
+        return this.refs.select.getScrollMetrics();
+    }
+
     render() {
 
         const {

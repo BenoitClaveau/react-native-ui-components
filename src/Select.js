@@ -30,6 +30,10 @@ class Select extends PureComponent {
         this.refs.flatlist.flashScrollIndicators();
     }
 
+    getScrollMetrics() {
+        return this.refs.flatlist.getScrollMetrics();
+    }
+
     render() {
 
         const {
