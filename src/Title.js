@@ -3,31 +3,38 @@ import {
     StyleSheet,
     TouchableOpacity,
     Text,
-    View
+    View,
 } from 'react-native';
-import theme from "./Theme";
+import theme, { overrideStyle } from "./Theme";
 
 class Title extends PureComponent {
 
     render() {
-        const { 
-            name, 
-            onPress, 
-            style, 
+        const {
+            name,
+            onPress,
+            style,
             children
         } = this.props;
-        
+
+        const {
+            fontSize,
+            color,
+            fontWeight,
+            ...containerStyles
+        } = style || {};
+
         if (onPress) {
             return (
-                <TouchableOpacity style={[styles.container, style]}>
-                    <Text style={styles.text}>{children}</Text>
+                <TouchableOpacity style={[styles.container, containerStyles]}>
+                    <Text style={overrideStyle(styles.text, { fontSize, fontWeight, color })}>{children}</Text>
                 </TouchableOpacity>
             )
         }
         else {
             return (
-                <View style={[styles.container, style]}>
-                    <Text style={styles.text}>{children}</Text>
+                <View style={[styles.container, containerStyles]}>
+                    <Text style={overrideStyle(styles.text, { fontSize, fontWeight, color })}>{children}</Text>
                 </View>
             )
         }
@@ -36,6 +43,7 @@ class Title extends PureComponent {
 
 let styles = {};
 export function createStyleSheet() {
+    console.log("createStyleSheet before", styles)
     styles = StyleSheet.create({
         container: {
             padding: 16,
@@ -49,6 +57,7 @@ export function createStyleSheet() {
             fontWeight: "600"
         },
     });
+    console.log("createStyleSheet after", styles)
 };
 
 

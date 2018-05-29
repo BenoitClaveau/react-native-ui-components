@@ -34,11 +34,14 @@ class VerticalExpandeable extends PureComponent {
         }
     });
 
-    constructor(props) {
-        super(props);
-        this.translateY.addListener((...args) => {
+    componentDidMount() {
+        this.translateYHandler = this.translateY.addListener((...args) => {
             this.props.onTranslateY && this.props.onTranslateY(...args);
         });
+    }
+
+    componentWillUnmount() {
+        this.translateYHandler.remove();
     }
 
     isOpen() {

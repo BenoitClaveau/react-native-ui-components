@@ -45,5 +45,6 @@ export { default as Dialog } from './src/Dialog';
 export { default as TextEditor } from './src/TextEditor';
 export { default as Timeline } from './src/Timeline';
 export { default as VerticalExpandeable } from './src/VerticalExpandeable';
+export { default as KeyboardInvariantView } from './src/KeyboardInvariantView';
 export { default as SafeAreaView } from './src/SafeAreaView';
 export { default as ThemeProvider } from './src/ThemeProvider';
