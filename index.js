@@ -37,6 +37,7 @@ export { default as TextInput } from './src/TextInput';
 export { default as Toolbar } from './src/Toolbar';
 export { default as Title } from './src/Title';
 export { default as Text } from './src/Text';
+export { default as Image } from './src/Image';
 export { default as Picture } from './src/Picture';
 export { default as AutoComplete } from './src/AutoComplete';
 export { default as Row } from './src/Row';

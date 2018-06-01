@@ -1,26 +1,44 @@
 import React, { PureComponent } from 'react';
 import {
     StyleSheet,
-    View
+    View,
+    TouchableOpacity,
 } from 'react-native';
 
 class Column extends PureComponent {
 
     render() {
         const {
+            onPress,
             children,
             style,
             ...others
         } = this.props;
 
-        return (
-            <View
-                style={[styles.column, style]}
-                {...others}
-            >
-                {children}
-            </View>
-        )
+        if (onPress) {
+            return (
+                <TouchableOpacity
+                    onPress={onPress}
+                >
+                    <View
+                        style={[styles.column, style]}
+                        {...others}
+                    >
+                        {children}
+                    </View>
+                </TouchableOpacity>
+            );
+        }
+        else {
+            return (
+                <View
+                    style={[styles.column, style]}
+                    {...others}
+                >
+                    {children}
+                </View>
+            );
+        }
     }
 };
 
