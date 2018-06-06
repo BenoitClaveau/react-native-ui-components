@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import {
     StyleSheet,
     TouchableOpacity,
+    TouchableNativeFeedback,
     View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -19,16 +20,21 @@ class MyIcon extends PureComponent {
 
         if (onPress) {
             return (
-                <TouchableOpacity
-                    style={others}
+
+                <TouchableNativeFeedback
                     onPress={onPress}
+                    //background={TouchableNativeFeedback.SelectableBackground()}
+                    background={TouchableNativeFeedback.Ripple('red')}
+                    delayPressIn={0}
                 >
-                    <Icon
-                        size={fontSize || 24}
-                        color={color || "#000"}
-                        name={name}
-                    />
-                </TouchableOpacity>
+                    <View style={others}>
+                        <Icon
+                            size={fontSize || 24}
+                            color={color || "#000"}
+                            name={name}
+                        />
+                    </View>
+                </TouchableNativeFeedback>
             )
         }
         else {

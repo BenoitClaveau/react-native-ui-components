@@ -62,6 +62,12 @@ class Timeline extends PureComponent {
         this.refs.flatlist.scrollToEnd(params);
     }
 
+    scrollTo(fn, params) {
+        const item = this.props.data.filter(fn)[0];
+        console.log("SCROLLTO item", item)
+        if (item) this.scrollToItem({ ...params, item });
+    }
+
     _pushMultiColumnViewable(arr, v) {
         const { numColumns, keyExtractor } = this.props;
         v.item.forEach((item, ii) => {
@@ -178,16 +184,30 @@ class Timeline extends PureComponent {
 
     get currentItem() {
         const {
-            itemLength,
             data,
         } = this.props;
 
+        return data[this.currentIndex];
+    }
+
+    get currentIndex() {
+        const {
+            itemLength,
+        } = this.props;
+
         const { contentLength, visibleLength, offset, dOffset } = this.getScrollMetrics();
-        const index = Math.max(Math.round(offset / itemLength), 0);
-        return data[index];
+        return Math.max(Math.round(offset / itemLength), 0);
+    }
+
+    componentDidUpdate() {
+        console.log("DID UPDATE timeline")
+
+        this.props.onDidUpdate && this.props.onDidUpdate();
     }
 
     render() {
+
+        console.log("RENDEr timeline")
 
         const {
             itemLength,
@@ -196,7 +216,7 @@ class Timeline extends PureComponent {
             onEndReached, //remove
             onEndReachedThreshold, //remove
             horizontal,
-            ...others
+            ...others,
         } = this.props;
 
         const onReachedThresholdValue = onReachedThreshold || (itemLength / this.windowLength) * this.mid;
