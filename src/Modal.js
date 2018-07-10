@@ -39,6 +39,7 @@ class MyModal extends PureComponent {
 
         const {
             children,
+            toolbar,
             ...others
         } = this.props;
 
@@ -50,10 +51,11 @@ class MyModal extends PureComponent {
                 onRequestClose={() => this.close()}
             >
                 <SafeAreaView>
+                    { toolbar !== false &&
                     <Toolbar
                         {...others}
-                        close={() => this.close()}
                     />
+                    }
                     {children}
                 </SafeAreaView>
             </Modal>

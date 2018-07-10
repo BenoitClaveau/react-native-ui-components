@@ -2,8 +2,13 @@ import React, { PureComponent } from 'react';
 import {
     StyleSheet,
     TextInput,
+    Text,
+    KeyboardAvoidingView,
+    Dimensions,
 } from 'react-native';
 import Modal from './Modal';
+import Button from './Button';
+import KeyboardInvariantView from './KeyboardInvariantView';
 import theme from "./Theme";
 
 class TextEditor extends PureComponent {
@@ -31,14 +36,17 @@ class TextEditor extends PureComponent {
 
     render() {
         const {
-            title, 
-            style, 
+            title,
+            style,
             ...others
         } = this.props;
+
+        const { height } = Dimensions.get("window");
 
         return (
             <Modal
                 ref={ref => this.modal = ref}
+                toolbar={false}
             >
                 <TextInput
                     ref={ref => this.textinput = ref}
@@ -49,6 +57,19 @@ class TextEditor extends PureComponent {
                     {...others}
                     style={[styles.textinput, style]}
                 />
+                <Button
+                    style={{
+                        position: "absolute",
+                        top: height - (75 + 8),
+                        left: 8,
+                        right: 8,
+                    }}
+                    onPress={() => {
+                        this.modal.close();
+                    }}
+                >
+                    <Text>Enregister</Text>
+                </Button>
             </Modal>
         )
     }
