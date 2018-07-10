@@ -13,6 +13,18 @@ class AutoComplete extends PureComponent {
         q: null
     }
 
+    open() {
+        if (!this.modal) return;
+        this.modal.open();
+    }
+
+    focus() {
+        this.open();
+    }
+
+    blur() {
+    }
+
     onChange(text) {
         if (!text) text = null;
         this.setState({ q: text }, () => {
@@ -36,6 +48,7 @@ class AutoComplete extends PureComponent {
         return (
             <View>
                 <Modal
+                    ref={ref => this.modal = ref}
                     search={this.state.q}
                     searchPlacehodler={searchPlacehodler}
                     onSearchChange={text => this.onChange(text)}

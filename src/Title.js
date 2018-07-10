@@ -43,7 +43,6 @@ class Title extends PureComponent {
 
 let styles = {};
 export function createStyleSheet() {
-    console.log("createStyleSheet before", styles)
     styles = StyleSheet.create({
         container: {
             padding: 16,
@@ -57,7 +56,6 @@ export function createStyleSheet() {
             fontWeight: "600"
         },
     });
-    console.log("createStyleSheet after", styles)
 };
 
 

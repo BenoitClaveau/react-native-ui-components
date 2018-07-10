@@ -16,15 +16,23 @@ class ComboBox extends PureComponent {
     }
 
     open() {
-        return this.refs.modal.open();
+        if (!this.modal) return;
+        this.modal.open();
     }
 
+    focus() {
+        this.open();
+    }
+
+    blur() {
+    }
+    
     onOpen(...args) {
         this.props.onOpen && this.onOpen.onClose(...args);
     }
 
     async close() {
-        return await this.refs.modal.close();
+        return await this.modal.close();
     }
 
     onClose(...args) {
@@ -37,23 +45,23 @@ class ComboBox extends PureComponent {
     }
 
     scrollToIndex(params) {
-        this.refs.select.scrollToIndex(params);
+        this.select.scrollToIndex(params);
     }
 
     scrollToItem(params) {
-        this.refs.select.scrollToItem(params);
+        this.select.scrollToItem(params);
     }
 
     scrollToOffset(params) {
-        this.refs.select.scrollToOffset(params);
+        this.select.scrollToOffset(params);
     }
 
     flashScrollIndicators() {
-        this.refs.select.flashScrollIndicators();
+        this.select.flashScrollIndicators();
     }
 
     getScrollMetrics() {
-        return this.refs.select.getScrollMetrics();
+        return this.select.getScrollMetrics();
     }
 
     render() {
@@ -73,14 +81,14 @@ class ComboBox extends PureComponent {
         return (
             <View>
                 <Modal
-                    ref={"modal"}
+                    ref={ref => this.modal = ref}
                     title
                     onOpen={(...args) => this.onOpen(...args)}
                     onClose={(...args) => this.onClose(...args)}
                     renderLeftComponent={(...args) => renderLeftComponent && renderLeftComponent(...args)}
                 >
                     <Select
-                        ref={"select"}
+                        ref={ref => this.select = ref}
                         onSelect={(...args) => this.onSelect(...args)}
                         timeline={timeline}
                         {...others}

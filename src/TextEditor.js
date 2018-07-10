@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import {
     StyleSheet,
+    TextInput,
 } from 'react-native';
 import Modal from './Modal';
 import theme from "./Theme";
@@ -16,6 +17,18 @@ class TextEditor extends PureComponent {
     state = {
     }
 
+    open() {
+        if (!this.modal) return;
+        this.modal.open();
+    }
+
+    focus() {
+        this.open();
+    }
+
+    blur() {
+    }
+
     render() {
         const {
             title, 
@@ -24,7 +37,9 @@ class TextEditor extends PureComponent {
         } = this.props;
 
         return (
-            <Modal>
+            <Modal
+                ref={ref => this.modal = ref}
+            >
                 <TextInput
                     ref={ref => this.textinput = ref}
                     multiline={true}
