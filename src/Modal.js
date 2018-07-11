@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import {
     Modal,
 } from 'react-native';
-import Toolbar from './Toolbar';
 import SafeAreaView from './SafeAreaView';
 
 class MyModal extends PureComponent {
@@ -10,6 +9,13 @@ class MyModal extends PureComponent {
     state = {
         modalVisible: false,
     }
+
+    // static getDerivedStateFromProps(nextProps, prevState) {
+    //     if (nextProps.modalVisible == prevState.modalVisible) return null;
+    //     return {
+    //         modalVisible: nextProps.modalVisible
+    //     }
+    // }
 
     async open() {
         const { onOpen } = this.props;
@@ -39,7 +45,11 @@ class MyModal extends PureComponent {
 
         const {
             children,
-            toolbar,
+            style,
+            onOpen,
+            onClose,
+            onKeyboardDidShow,
+            onKeyboardDidHide,
             ...others
         } = this.props;
 
@@ -49,13 +59,13 @@ class MyModal extends PureComponent {
                 transparent={false}
                 visible={this.state.modalVisible}
                 onRequestClose={() => this.close()}
+                {...others}
             >
-                <SafeAreaView>
-                    { toolbar !== false &&
-                    <Toolbar
-                        {...others}
-                    />
-                    }
+                <SafeAreaView 
+                    style={style}
+                    onKeyboardDidShow={onKeyboardDidShow}
+                    onKeyboardDidHide={onKeyboardDidHide}
+                >
                     {children}
                 </SafeAreaView>
             </Modal>

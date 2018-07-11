@@ -25,7 +25,7 @@ class AutoComplete extends PureComponent {
     blur() {
     }
 
-    onChange(text) {
+    onSearchChange(text) {
         if (!text) text = null;
         this.setState({ q: text }, () => {
             this.debounceFetch();
@@ -49,11 +49,13 @@ class AutoComplete extends PureComponent {
             <View>
                 <Modal
                     ref={ref => this.modal = ref}
-                    search={this.state.q}
-                    searchPlacehodler={searchPlacehodler}
-                    onSearchChange={text => this.onChange(text)}
-                    renderPlaceholder={renderPlaceholder}
                 >
+                    <Toolbar
+                        search={this.state.q}
+                        searchPlacehodler={searchPlacehodler}
+                        onSearchChange={text => this.onSearchChange(text)}
+                        renderPlaceholder={renderPlaceholder}
+                    />
                     <Select
                         {...others}
                     />

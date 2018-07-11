@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import Select from './Select';
 import Modal from './Modal';
+import Toolbar from './Toolbar';
 
 class ComboBox extends PureComponent {
 
@@ -27,16 +28,9 @@ class ComboBox extends PureComponent {
     blur() {
     }
     
-    onOpen(...args) {
-        this.props.onOpen && this.onOpen.onClose(...args);
-    }
-
     async close() {
+        if (!this.modal) return;
         return await this.modal.close();
-    }
-
-    onClose(...args) {
-        this.props.onClose && this.props.onClose(...args);
     }
 
     async onSelect(...args) {
@@ -69,6 +63,8 @@ class ComboBox extends PureComponent {
         const {
             title,
             renderPlaceholder,
+            onOpen,
+            onClose,
             onSelect,
             renderLeftComponent,
             timeline,
@@ -82,14 +78,16 @@ class ComboBox extends PureComponent {
             <View>
                 <Modal
                     ref={ref => this.modal = ref}
-                    title
-                    onOpen={(...args) => this.onOpen(...args)}
-                    onClose={(...args) => this.onClose(...args)}
-                    renderLeftComponent={(...args) => renderLeftComponent && renderLeftComponent(...args)}
                 >
+                    <Toolbar
+                        title
+                        renderLeftComponent={renderLeftComponent}                   
+                        onOpen={onOpen}
+                        onClose={onClose}
+                    />
                     <Select
                         ref={ref => this.select = ref}
-                        onSelect={(...args) => this.onSelect(...args)}
+                        onSelect={this.onSelect}
                         timeline={timeline}
                         {...others}
                     />

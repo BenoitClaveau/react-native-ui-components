@@ -10,18 +10,18 @@ class KeyboardInvariantView extends PureComponent {
         height: null,
     };
 
-    changeDimensions = () => {
+    resize = () => {
         this.setState({
             height: null
         });
     }
 
     componentDidMount() {
-        Dimensions.addEventListener('change', this.changeDimensions);
+        Dimensions.addEventListener('change', this.resize);
     }
 
     componentWillUnmount() {
-        Dimensions.removeEventListener('change', this.changeDimensions);
+        Dimensions.removeEventListener('change', this.resize);
     }
 
     render() {
@@ -29,14 +29,19 @@ class KeyboardInvariantView extends PureComponent {
         const {
             children,
             style,
+            initialHeight,
+            height,
+            style,
         } = this.props;
 
         const {
-            height,
+            height: stateHeight,
         } = this.state;
 
-        const localStyle = height ? { height : height } : { flex : 1 }
+        const { height: windowHeight } = Dimensions.get("window");
 
+        const localHeight = height ? height : stateHeight ? stateHeight : initialHeight;
+        console.log("*************** TOP", windowHeight - localHeight)
         return (
             <View
                 onLayout={({ nativeEvent: { layout } }) => {
@@ -44,16 +49,12 @@ class KeyboardInvariantView extends PureComponent {
                         height: layout.height
                     })
                 }}
-                style={[{
-                    backgroundColor: "transparent",
-                }, localStyle]}
+                style={[style, {
+                    position: "absolute",
+                    top: windowHeight - localHeight
+                }]}
             >
-                <View style={[{
-                    flex: 1,
-                    justifyContent: "flex-end",
-                }, style]}>
-                    {children}
-                </View>
+                {children}
             </View>
         )
     }

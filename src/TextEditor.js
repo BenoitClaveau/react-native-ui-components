@@ -57,19 +57,15 @@ class TextEditor extends PureComponent {
                     {...others}
                     style={[styles.textinput, style]}
                 />
-                <Button
-                    style={{
-                        position: "absolute",
-                        top: height - (75 + 8),
-                        left: 8,
-                        right: 8,
-                    }}
-                    onPress={() => {
-                        this.modal.close();
-                    }}
-                >
-                    <Text>Enregister</Text>
-                </Button>
+                <KeyboardInvariantView>
+                    <Button
+                        onPress={() => {
+                            this.modal.close();
+                        }}
+                    >
+                        <Text>Enregister</Text>
+                    </Button>
+                </KeyboardInvariantView>
             </Modal>
         )
     }
