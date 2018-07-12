@@ -2,22 +2,14 @@ import React, { PureComponent } from 'react';
 import {
     StyleSheet,
     TextInput,
-    Text,
-    KeyboardAvoidingView,
-    Dimensions,
+    ScrollView,
 } from 'react-native';
 import Modal from './Modal';
-import Button from './Button';
-import KeyboardInvariantView from './KeyboardInvariantView';
 import theme from "./Theme";
+import Toolbar from './Toolbar';
+import Icon from './Icon';
 
 class TextEditor extends PureComponent {
-
-    static getDerivedStateFromProps(props, state) {
-        return {
-            text: props.text,
-        }
-    }
 
     state = {
     }
@@ -38,34 +30,45 @@ class TextEditor extends PureComponent {
         const {
             title,
             style,
+            onValidate,
             ...others
         } = this.props;
-
-        const { height } = Dimensions.get("window");
 
         return (
             <Modal
                 ref={ref => this.modal = ref}
-                toolbar={false}
             >
-                <TextInput
-                    ref={ref => this.textinput = ref}
-                    multiline={true}
-                    autoFocus={true}
-                    autoGrow={true}
-                    underlineColorAndroid={"transparent"}
-                    {...others}
-                    style={[styles.textinput, style]}
+                <Toolbar
+                    renderRightComponent={() => (
+                        <Icon
+                            style={styles.icon}
+                            onPress={() => {
+                                this.modal.close();
+                                onValidate && onValidate();
+                            }}
+                            name="md-checkmark"
+                        />
+                    )}
                 />
-                <KeyboardInvariantView>
-                    <Button
-                        onPress={() => {
-                            this.modal.close();
+                <ScrollView
+                    ref={ref => this.scrollview = ref}
+                >
+                    <TextInput
+                        ref={ref => this.textinput = ref}
+                        multiline={true}
+                        autoFocus={true}
+                        autoGrow={true}
+                        underlineColorAndroid={"transparent"}
+                        onContentSizeChange={({ nativeEvent: { contentSize: { width, height } } }) => {
+                            this.scrollview && this.scrollview.scrollToEnd({animated: true});
                         }}
-                    >
-                        <Text>Enregister</Text>
-                    </Button>
-                </KeyboardInvariantView>
+                        onFocus={() => {
+                            this.scrollview && this.scrollview.scrollToEnd({animated: true});
+                        }}
+                        {...others}
+                        style={[styles.textinput, style]}
+                    />
+                </ScrollView>
             </Modal>
         )
     }

@@ -61,7 +61,7 @@ class MyModal extends PureComponent {
                 onRequestClose={() => this.close()}
                 {...others}
             >
-                <SafeAreaView 
+                <SafeAreaView
                     style={style}
                     onKeyboardDidShow={onKeyboardDidShow}
                     onKeyboardDidHide={onKeyboardDidHide}
