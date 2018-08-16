@@ -15,6 +15,7 @@ const theme = {
     INPUT_FONT_SIZE: 18 * fontScale,
     TITLE_FONT_SIZE: 20 * fontScale,
     ICON_FONT_SIZE: 28 * fontScale,
+    PADDING: 16,
 }
 
 export default theme;

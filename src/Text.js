@@ -3,9 +3,9 @@ import {
     StyleSheet,
     TouchableOpacity,
     Text,
-    View
+    Dimensions
 } from 'react-native';
-import theme, { overrideStyle } from "./Theme";
+import theme from "./Theme";
 
 class MyText extends PureComponent {
 
@@ -13,15 +13,48 @@ class MyText extends PureComponent {
         const { 
             style, 
             children,
+            onPress,
+            containerStyles,
+            paddingTop,
+            paddingBottom,
+            paddingLeft,
+            paddingRight,
+            paddingHorizontal,
+            paddingVertical,
+            padding,
+            widthOffset,
             ...others,
         } = this.props;
-        
-        return (
-            <Text
-                style={overrideStyle(styles.text, style)}
+
+        const text = (
+            <Text 
                 {...others}
+                style={[styles.text, { 
+                    padding: padding ? theme.PADDING : undefined, 
+                    paddingHorizontal: padding ? theme.PADDING : undefined, 
+                    paddingVertical: paddingVertical ? theme.PADDING : undefined,
+                    paddingTop: paddingTop ? theme.PADDING : undefined,
+                    paddingBottom: paddingBottom ? theme.PADDING : undefined,
+                    paddingLeft: paddingLeft ? theme.PADDING : undefined,
+                    paddingRight: paddingRight ? theme.PADDING : undefined,
+                    width: widthOffset ? Dimensions.get("window").width - widthOffset : undefined,
+                }, style]}
             >{children}</Text>
-        )
+        );
+        
+        if (onPress) {
+            return (
+                <TouchableOpacity
+                    style={containerStyles}
+                    onPress
+                >
+                { text }
+                </TouchableOpacity>
+            )
+        }
+
+        return text;
+        
     }
 };
 

@@ -12,33 +12,30 @@ class Column extends PureComponent {
             onPress,
             children,
             style,
+            containerStyle,
             ...others
         } = this.props;
+
+        const view = (
+            <View
+                style={[styles.column, style]}
+                {...others}
+            >
+                {children}
+            </View>
+        )
 
         if (onPress) {
             return (
                 <TouchableOpacity
+                    style={containerStyle}
                     onPress={onPress}
                 >
-                    <View
-                        style={[styles.column, style]}
-                        {...others}
-                    >
-                        {children}
-                    </View>
+                    { view }
                 </TouchableOpacity>
             );
         }
-        else {
-            return (
-                <View
-                    style={[styles.column, style]}
-                    {...others}
-                >
-                    {children}
-                </View>
-            );
-        }
+        return view;
     }
 };
 
