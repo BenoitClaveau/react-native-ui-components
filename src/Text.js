@@ -5,18 +5,22 @@ import {
     Text,
     View
 } from 'react-native';
-import theme from "./Theme";
+import theme, { overrideStyle } from "./Theme";
 
 class MyText extends PureComponent {
 
     render() {
         const { 
             style, 
-            children
+            children,
+            ...others,
         } = this.props;
         
         return (
-            <Text style={[styles.text, style]}>{children}</Text>
+            <Text
+                style={overrideStyle(styles.text, style)}
+                {...others}
+            >{children}</Text>
         )
     }
 };

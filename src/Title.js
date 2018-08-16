@@ -14,7 +14,8 @@ class Title extends PureComponent {
             name,
             onPress,
             style,
-            children
+            children,
+            ...others,
         } = this.props;
 
         const {
@@ -27,14 +28,20 @@ class Title extends PureComponent {
         if (onPress) {
             return (
                 <TouchableOpacity style={[styles.container, containerStyles]}>
-                    <Text style={overrideStyle(styles.text, { fontSize, fontWeight, color })}>{children}</Text>
+                    <Text 
+                        style={overrideStyle(styles.text, { fontSize, fontWeight, color })}
+                        {...others}
+                    >{children}</Text>
                 </TouchableOpacity>
             )
         }
         else {
             return (
                 <View style={[styles.container, containerStyles]}>
-                    <Text style={overrideStyle(styles.text, { fontSize, fontWeight, color })}>{children}</Text>
+                    <Text 
+                        style={overrideStyle(styles.text, { fontSize, fontWeight, color })}
+                        {...others}
+                    >{children}</Text>
                 </View>
             )
         }
