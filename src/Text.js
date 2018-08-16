@@ -29,7 +29,6 @@ let styles = {};
 export function createStyleSheet() {
     styles = StyleSheet.create({
         text: {
-            paddingHorizontal: 16,
             fontSize: theme.TEXT_FONT_SIZE,
             color: theme.TEXT_COLOR,
             fontWeight: "500"
