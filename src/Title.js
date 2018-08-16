@@ -27,7 +27,10 @@ class Title extends PureComponent {
 
         if (onPress) {
             return (
-                <TouchableOpacity style={[styles.container, containerStyles]}>
+                <TouchableOpacity 
+                    style={[styles.container, containerStyles]}
+                    onPress
+                >
                     <Text 
                         style={overrideStyle(styles.text, { fontSize, fontWeight, color })}
                         {...others}
