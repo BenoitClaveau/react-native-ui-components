@@ -9,6 +9,7 @@ import theme from "./Theme";
 class Button extends PureComponent {
 
     render() {
+        
         const {
             disabled,
             children,
@@ -16,11 +17,20 @@ class Button extends PureComponent {
             onPress,
         } = this.props;
 
+        if (disabled) 
+            return (
+                <View
+                    style={[styles.container, style, { opacity: 0.4 }]}
+                >
+                    { children }
+                </View>
+            )
+        
         if (onPress)
             return (
                 <TouchableOpacity
-                    style={[styles.container, style, { opacity: disabled ? 0.4 : 1 }]}
-                    onPress={() => !disabled && onPress && onPress()}
+                    style={[styles.container, style]}
+                    onPress={() => onPress && onPress()}
                 >
                     { children }
                 </TouchableOpacity>
@@ -28,7 +38,7 @@ class Button extends PureComponent {
 
         return (
             <View
-                style={[styles.container, style, { opacity: disabled ? 0.4 : 1 }]}
+                style={[styles.container, style]}
             >
                 { children }
             </View>

@@ -94,7 +94,7 @@ export function createStyleSheet() {
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "flex-start",
-            backgroundColor: "red",
+            //backgroundColor: "red",
             ...Platform.select({
                 ios: {
                     height: 44,
@@ -116,7 +116,7 @@ export function createStyleSheet() {
             flexDirection: "row",
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: "blue",
+            //backgroundColor: "blue",
             ...Platform.select({
                 ios: {
                     width: 70,
@@ -131,7 +131,7 @@ export function createStyleSheet() {
         center: {
             flexDirection: "row",
             alignItems: 'center',
-            backgroundColor: "black",
+            //backgroundColor: "black",
             flexGrow: 1,
             flexShrink: 1,
             ...Platform.select({
@@ -149,7 +149,7 @@ export function createStyleSheet() {
             flexDirection: "row",
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: "yellow",
+            //backgroundColor: "yellow",
             ...Platform.select({
                 ios: {
                     width: 70,
@@ -169,6 +169,7 @@ export function createStyleSheet() {
         icon: {
             alignItems: 'center',
             justifyContent: 'center',
+            color: theme.TEXT_COLOR,
             ...Platform.select({
                 ios: {
                     width: 44,
