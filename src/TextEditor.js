@@ -60,6 +60,7 @@ class TextEditor extends PureComponent {
             value, //exclude from props
             onValidate, //exclude from props
             onChangeText,
+            containerStyle,
             ...others
         } = this.props;
 
@@ -70,10 +71,12 @@ class TextEditor extends PureComponent {
             <Modal
                 ref={ref => this.modal = ref}
             >
+                {renderModalHeaderComponent}
                 <ScrollView
                     ref={ref => this.scrollview = ref}
+                    style={containerStyle}
+                    keyboardShouldPersistTaps={"handled"}
                 >
-                    { renderModalHeaderComponent }
                     <TextInput
                         ref={ref => this.textinput = ref}
                         multiline={true}
@@ -95,7 +98,7 @@ class TextEditor extends PureComponent {
                         style={[styles.textinput, style]}
                     />
                 </ScrollView>
-                { renderModalFooterComponent }
+                {renderModalFooterComponent}
             </Modal>
         )
     }
@@ -103,9 +106,9 @@ class TextEditor extends PureComponent {
     renderModalHeaderComponent() {
         return (
             <View style={{
-                paddingHorizontal: 16,
                 flexDirection: "row",
-                justifyContent: "flex-end"
+                justifyContent: "space-between",
+                height: 40,
             }}>
                 <Icon
                     onPress={() => {
@@ -113,8 +116,22 @@ class TextEditor extends PureComponent {
                     }}
                     name="ios-close"
                     style={{
+                        width: 48,
+                        height: 48,
                         color: theme.TEXT_COLOR,
-                        fontSize: 46,
+                        fontSize: 48,
+                    }}
+                />
+                <Icon
+                    onPress={() => {
+                        this.validate();
+                    }}
+                    name="ios-save"
+                    style={{
+                        width: 48,
+                        height: 48,
+                        color: theme.TEXT_COLOR,
+                        fontSize: 28,
                     }}
                 />
             </View>
@@ -122,7 +139,6 @@ class TextEditor extends PureComponent {
     }
 
     renderModalFooterComponent() {
-
         const { height } = Dimensions.get("window");
 
         return (

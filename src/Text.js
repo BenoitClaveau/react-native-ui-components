@@ -31,7 +31,7 @@ class MyText extends PureComponent {
                 {...others}
                 style={[styles.text, { 
                     padding: padding ? theme.PADDING : undefined, 
-                    paddingHorizontal: padding ? theme.PADDING : undefined, 
+                    paddingHorizontal: paddingHorizontal ? theme.PADDING : undefined, 
                     paddingVertical: paddingVertical ? theme.PADDING : undefined,
                     paddingTop: paddingTop ? theme.PADDING : undefined,
                     paddingBottom: paddingBottom ? theme.PADDING : undefined,

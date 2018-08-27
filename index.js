@@ -10,6 +10,7 @@ import { createStyleSheet as createStyleSheetTextEditor } from './src/TextEditor
 import { createStyleSheet as createStyleSheetTextInput } from './src/TextInput';
 import { createStyleSheet as createStyleSheetTitle } from './src/Title';
 import { createStyleSheet as createStyleSheetToolbar } from './src/Toolbar';
+import { createStyleSheet as createStyleSheetIcon } from './src/Icon';
 
 export function customize(options) {
     customizeTheme(options);
@@ -24,6 +25,7 @@ export function customize(options) {
     createStyleSheetTextInput();
     createStyleSheetTitle();
     createStyleSheetToolbar();
+    createStyleSheetIcon();
 }
 
 export { default as Theme } from './src/Theme';

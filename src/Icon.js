@@ -19,25 +19,21 @@ class MyIcon extends PureComponent {
 
         if (onPress) {
             return (
-
                 <TouchableOpacity
                     onPress={onPress}
+                    style={[styles.container, others]}
                 >
-                    <View style={others}>
-                        <Icon
-                            size={fontSize || 24}
-                            color={color || "#F00"}
-                            name={name}
-                        />
-                    </View>
+                    <Icon
+                        size={fontSize || 24}
+                        color={color || "#F00"}
+                        name={name}
+                    />
                 </TouchableOpacity>
             )
         }
         else {
             return (
-                <View
-                    style={others}
-                >
+                <View style={[styles.container, others]}>
                     <Icon
                         size={fontSize || 24}
                         color={color || "#F00"}
@@ -47,6 +43,16 @@ class MyIcon extends PureComponent {
             )
         }
     }
+};
+
+let styles = {};
+export function createStyleSheet() {
+    styles = StyleSheet.create({
+        container: {
+            justifyContent: "center",
+            alignItems: "center",
+        }
+    });
 };
 
 export default MyIcon;
