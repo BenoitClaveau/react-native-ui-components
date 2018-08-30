@@ -32,7 +32,7 @@ class Dialog {
                     },
                     {
                         text: `ANNULER`, onPress: () => {
-                            reject({ canceled: true});
+                            resolve({ canceled: true});
                         }
                     },
                 ],
