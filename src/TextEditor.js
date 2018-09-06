@@ -70,6 +70,11 @@ class TextEditor extends PureComponent {
         return (
             <Modal
                 ref={ref => this.modal = ref}
+                onOpen={() => {
+                    setTimeout(() => {
+                        this.textinput.focus();
+                    }, 250);
+                }}
             >
                 {renderModalHeaderComponent}
                 <ScrollView
@@ -80,7 +85,7 @@ class TextEditor extends PureComponent {
                     <TextInput
                         ref={ref => this.textinput = ref}
                         multiline={true}
-                        autoFocus={true}
+                        autoFocus={false}
                         autoGrow={true}
                         underlineColorAndroid={"transparent"}
                         onContentSizeChange={({ nativeEvent: { contentSize: { width, height } } }) => {
@@ -126,12 +131,12 @@ class TextEditor extends PureComponent {
                     onPress={() => {
                         this.validate();
                     }}
-                    name="ios-save"
+                    name="ios-checkmark"
                     style={{
                         width: 48,
                         height: 48,
-                        color: theme.TEXT_COLOR,
-                        fontSize: 28,
+                        color: theme.PRIMARY_COLOR,
+                        fontSize: 48,
                     }}
                 />
             </View>
