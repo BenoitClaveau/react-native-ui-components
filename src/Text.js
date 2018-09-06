@@ -46,7 +46,7 @@ class MyText extends PureComponent {
             return (
                 <TouchableOpacity
                     style={containerStyles}
-                    onPress
+                    onPress={onPress}
                 >
                 { text }
                 </TouchableOpacity>

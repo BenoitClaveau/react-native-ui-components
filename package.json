@@ -1,6 +1,6 @@
 {
   "name": "react-native-ui-components",
-  "version": "1.0.31",
+  "version": "1.0.32",
   "description": "UI components for React Native",
   "main": "index.js",
   "scripts": {
