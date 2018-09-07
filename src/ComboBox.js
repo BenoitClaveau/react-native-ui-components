@@ -2,40 +2,21 @@ import React, { PureComponent } from 'react';
 import { 
     View,
     TouchableOpacity,
-    Text,
-    InteractionManager,
 } from 'react-native';
 import Select from './Select';
 import Modal from './Modal';
-import Toolbar from './Toolbar';
+import theme from "./Theme";
+import Icon from './Icon';
 
 class ComboBox extends PureComponent {
 
-    constructor(props) {
-        super(props);
-        if (!props.onSelect) throw new Error("onSelect is not defined.");
+    state = {
+        modalVisible: false
     }
 
-    open() {
-        if (!this.modal) return;
-        this.modal.open();
-    }
-
-    focus() {
-        this.open();
-    }
-
-    blur() {
-    }
-    
-    async close() {
-        if (!this.modal) return;
-        return await this.modal.close();
-    }
-
-    async onSelect(...args) {
-        await this.close();
-        this.props.onSelect(...args);
+    onSelect(...args) {
+        this.close();
+        this.props.onSelect && this.props.onSelect(...args);
     }
 
     scrollToIndex(params) {
@@ -58,39 +39,44 @@ class ComboBox extends PureComponent {
         return this.select.getScrollMetrics();
     }
 
+    open() {
+        this.setState({ modalVisible: true });
+    }
+
+    close() {
+        this.setState({ modalVisible: false });
+    }
+
     render() {
 
         const {
-            title,
             renderPlaceholder,
-            onOpen,
-            onClose,
             onSelect,
-            renderLeftComponent,
-            timeline,
+            onRequestClose,
             ...others
         } = this.props;
 
         if (!renderPlaceholder) throw new Error("renderPlaceholder is not defined.");
         const placeholder = renderPlaceholder();
 
+        const renderModalHeaderComponent = this.props.renderModalHeaderComponent ? this.props.renderModalHeaderComponent() : this.renderModalHeaderComponent();
+        const renderModalFooterComponent = this.props.renderModalFooterComponent ? this.props.renderModalFooterComponent() : this.renderModalFooterComponent();
+
         return (
             <View>
                 <Modal
-                    ref={ref => this.modal = ref}
+                    modalVisible={modalVisible}
+                    onRequestClose={onRequestClose}
                 >
-                    <Toolbar
-                        title
-                        renderLeftComponent={renderLeftComponent}                   
-                        onOpen={onOpen}
-                        onClose={onClose}
-                    />
+                    {renderModalHeaderComponent}
                     <Select
                         ref={ref => this.select = ref}
-                        onSelect={this.onSelect}
-                        timeline={timeline}
+                        onSelect={(...args) => {
+                            this.onSelect(...args);
+                        }}
                         {...others}
                     />
+                    {renderModalFooterComponent}
                 </Modal>
                 <TouchableOpacity
                     onPress={() => this.open()}
@@ -99,6 +85,33 @@ class ComboBox extends PureComponent {
                 </TouchableOpacity>
             </View>
         )
+    }
+
+    renderModalHeaderComponent() {
+        return (
+            <View style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                height: 40,
+            }}>
+                <Icon
+                    onPress={() => {
+                        this.close();
+                    }}
+                    name="ios-close"
+                    style={{
+                        width: 48,
+                        height: 48,
+                        color: theme.TEXT_COLOR,
+                        fontSize: 48,
+                    }}
+                />
+            </View>
+        );
+    }
+
+    renderModalFooterComponent() {
+        return null;
     }
 };
 

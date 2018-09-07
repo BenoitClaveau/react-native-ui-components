@@ -23,44 +23,40 @@ class TextEditor extends PureComponent {
     state = {
     }
 
-    open() {
-        if (!this.modal) return;
-        this.modal.open();
-    }
-
-    focus() {
-        this.open();
-    }
-
-    blur() {
-    }
-
-    close() {
-        this.modal.close();
-        this.setState({ value: this.props.value });
-    }
 
     validate() {
         const {
             onValidate,
+            onRequestClose,
             value,
         } = this.props;
 
-        this.modal.close();
         if (onValidate) {
             const svalue = this.state.value;
             this.setState({ value: value });
             onValidate(svalue, svalue !== value);
         }
+
+        onRequestClose();
+    }
+
+    cancel() {
+        const {
+            onRequestClose,
+        } = this.props;
+
+        onRequestClose();
     }
 
     render() {
         const {
             style,
+            containerStyle,
             value, //exclude from props
             onValidate, //exclude from props
             onChangeText,
-            containerStyle,
+            modalVisible,
+            onRequestClose,
             ...others
         } = this.props;
 
@@ -69,11 +65,15 @@ class TextEditor extends PureComponent {
 
         return (
             <Modal
-                ref={ref => this.modal = ref}
-                onOpen={() => {
-                    setTimeout(() => {
-                        this.textinput.focus();
-                    }, 250);
+                modalVisible={modalVisible}
+                onRequestClose={onRequestClose}
+                onComponentDidUpdate={() => {
+                    if (modalVisible) {
+                        this.textinput.blur(); //force to reset
+                        setTimeout(() => {
+                            this.textinput.focus();
+                        }, 250)
+                    }
                 }}
             >
                 {renderModalHeaderComponent}
@@ -85,8 +85,8 @@ class TextEditor extends PureComponent {
                     <TextInput
                         ref={ref => this.textinput = ref}
                         multiline={true}
-                        autoFocus={false}
                         autoGrow={true}
+                        autoFocus={false}
                         underlineColorAndroid={"transparent"}
                         onContentSizeChange={({ nativeEvent: { contentSize: { width, height } } }) => {
                             this.scrollview && this.scrollview.scrollToEnd({ animated: true });
@@ -117,7 +117,7 @@ class TextEditor extends PureComponent {
             }}>
                 <Icon
                     onPress={() => {
-                        this.close();
+                        this.cancel();
                     }}
                     name="ios-close"
                     style={{

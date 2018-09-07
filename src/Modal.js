@@ -6,39 +6,10 @@ import SafeAreaView from './SafeAreaView';
 
 class MyModal extends PureComponent {
 
-    state = {
-        modalVisible: false,
-    }
-
-    // static getDerivedStateFromProps(nextProps, prevState) {
-    //     if (nextProps.modalVisible == prevState.modalVisible) return null;
-    //     return {
-    //         modalVisible: nextProps.modalVisible
-    //     }
-    // }
-
-    async open() {
-        const { onOpen } = this.props;
-        return await new Promise((resolve, reject) => {
-            this.setState({
-                modalVisible: true
-            }, () => {
-                onOpen && onOpen();
-                resolve();
-            });
-        });
-    }
-
-    async close() {
-        const { onClose } = this.props;
-        return await new Promise((resolve, reject) => {
-            this.setState({
-                modalVisible: false
-            }, () => {
-                onClose && onClose();
-                resolve();
-            });
-        });
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.modalVisible !== this.props.modalVisible) {
+            this.props.onComponentDidUpdate && this.props.onComponentDidUpdate(prevProps, prevState);
+        }
     }
 
     render() {
@@ -46,8 +17,8 @@ class MyModal extends PureComponent {
         const {
             children,
             style,
-            onOpen,
-            onClose,
+            modalVisible,
+            onRequestClose,
             onKeyboardDidShow,
             onKeyboardDidHide,
             ...others
@@ -57,8 +28,8 @@ class MyModal extends PureComponent {
             <Modal
                 animationType={"fade"}
                 transparent={false}
-                visible={this.state.modalVisible}
-                onRequestClose={() => this.close()}
+                visible={modalVisible}
+                onRequestClose={onRequestClose}
                 {...others}
             >
                 <SafeAreaView
