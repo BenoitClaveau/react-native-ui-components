@@ -216,7 +216,7 @@ class Timeline extends PureComponent {
             onEndReached, //remove
             onEndReachedThreshold, //remove
             horizontal,
-            ...others,
+            ...others
         } = this.props;
 
         const onReachedThresholdValue = onReachedThreshold || (itemLength / this.windowLength) * this.mid;

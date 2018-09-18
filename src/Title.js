@@ -9,7 +9,7 @@ class Title extends PureComponent {
         const {
             children,
             style,
-            ...others,
+            ...others
         } = this.props;
 
         return (

@@ -23,7 +23,7 @@ class MyText extends PureComponent {
             paddingVertical,
             padding,
             widthOffset,
-            ...others,
+            ...others
         } = this.props;
 
         const text = (
