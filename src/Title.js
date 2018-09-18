@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet } from 'react-native';
 import Text from "./Text";
-import theme, { overrideStyle } from "./Theme";
+import theme from "./Theme";
 
 class Title extends PureComponent {
 
