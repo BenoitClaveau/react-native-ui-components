@@ -6,17 +6,14 @@ import {
 } from 'react-native';
 import Icon from "./Icon";
 import theme from "./Theme";
-import { select } from '../../../src/redux/reducers/user';
 
 class CheckBox extends PureComponent {
 
     render() {
         const {
-            children,
             style,
             checked,
-            onPress,
-            ...others
+            onPress
         } = this.props;
 
         const fontSize = style && style.fontSize ? style.fontSize : 24;
