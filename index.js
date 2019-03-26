@@ -11,6 +11,7 @@ import { createStyleSheet as createStyleSheetTextInput } from './src/TextInput';
 import { createStyleSheet as createStyleSheetTitle } from './src/Title';
 import { createStyleSheet as createStyleSheetToolbar } from './src/Toolbar';
 import { createStyleSheet as createStyleSheetIcon } from './src/Icon';
+import { createStyleSheet as createStyleSheetCheckBox } from './src/CheckBox';
 
 export function customize(options) {
     customizeTheme(options);
@@ -26,6 +27,7 @@ export function customize(options) {
     createStyleSheetTitle();
     createStyleSheetToolbar();
     createStyleSheetIcon();
+    createStyleSheetCheckBox();
 }
 
 export { default as Theme } from './src/Theme';
@@ -34,6 +36,7 @@ export { default as Modal } from './src/Modal';
 export { default as ComboBox } from './src/ComboBox';
 export { default as DatePicker } from './src/DatePicker';
 export { default as Icon } from './src/Icon';
+export { default as CheckBox } from './src/CheckBox';
 export { default as Select } from './src/Select';
 export { default as TextInput } from './src/TextInput';
 export { default as Toolbar } from './src/Toolbar';
