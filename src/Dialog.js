@@ -10,7 +10,7 @@ class Dialog {
                 [
                     {
                         text: `CONTINUER`, onPress: () => {
-                            resolve();
+                            resolve({ validated: true });
                         }
                     }
                 ],
@@ -27,12 +27,12 @@ class Dialog {
                 [
                     {
                         text: `VALIDER`, onPress: () => {
-                            resolve();
+                            resolve({ validated: true });
                         }
                     },
                     {
                         text: `ANNULER`, onPress: () => {
-                            reject();
+                            resolve({ canceled: true});
                         }
                     },
                 ],

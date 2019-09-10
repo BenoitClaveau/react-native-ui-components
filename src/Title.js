@@ -1,63 +1,34 @@
 import React, { PureComponent } from 'react';
-import {
-    StyleSheet,
-    TouchableOpacity,
-    Text,
-    View,
-} from 'react-native';
-import theme, { overrideStyle } from "./Theme";
+import { StyleSheet } from 'react-native';
+import Text from "./Text";
+import theme from "./Theme";
 
 class Title extends PureComponent {
 
     render() {
         const {
-            name,
-            onPress,
+            children,
             style,
-            children
+            ...others
         } = this.props;
 
-        const {
-            fontSize,
-            color,
-            fontWeight,
-            ...containerStyles
-        } = style || {};
-
-        if (onPress) {
-            return (
-                <TouchableOpacity style={[styles.container, containerStyles]}>
-                    <Text style={overrideStyle(styles.text, { fontSize, fontWeight, color })}>{children}</Text>
-                </TouchableOpacity>
-            )
-        }
-        else {
-            return (
-                <View style={[styles.container, containerStyles]}>
-                    <Text style={overrideStyle(styles.text, { fontSize, fontWeight, color })}>{children}</Text>
-                </View>
-            )
-        }
+        return (
+            <Text
+                {...others}
+                style={[styles.text, style]}
+            >{children}</Text>);
     }
 };
 
 let styles = {};
 export function createStyleSheet() {
-    console.log("createStyleSheet before", styles)
     styles = StyleSheet.create({
-        container: {
-            padding: 16,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center"
-        },
         text: {
             fontSize: theme.TITLE_FONT_SIZE,
             color: theme.PRIMARY_COLOR,
             fontWeight: "600"
         },
     });
-    console.log("createStyleSheet after", styles)
 };
 
 

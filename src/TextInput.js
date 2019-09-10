@@ -11,6 +11,21 @@ class MyTextInput extends PureComponent {
     state = {
     }
 
+    open() {
+        if (!this.textinput) return;
+        this.textinput.open();
+    }
+
+    focus() {
+        if (!this.textinput) return;
+        this.textinput.focus();
+    }
+
+    blur() {
+        if (!this.textinput) return;
+        this.textinput.blur();
+    }
+
     render() {
         const { 
             style, 
@@ -19,6 +34,7 @@ class MyTextInput extends PureComponent {
 
         return (
             <TextInput
+                ref={ref => this.textinput = ref}
                 style={[styles.input, style]}
                 underlineColorAndroid={"transparent"}
                 {...others}

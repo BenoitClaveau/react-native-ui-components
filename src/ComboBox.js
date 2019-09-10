@@ -2,89 +2,81 @@ import React, { PureComponent } from 'react';
 import { 
     View,
     TouchableOpacity,
-    Text,
-    InteractionManager,
 } from 'react-native';
 import Select from './Select';
 import Modal from './Modal';
+import theme from "./Theme";
+import Icon from './Icon';
 
 class ComboBox extends PureComponent {
 
-    constructor(props) {
-        super(props);
-        if (!props.onSelect) throw new Error("onSelect is not defined.");
+    state = {
+        modalVisible: false
     }
 
-    open() {
-        return this.refs.modal.open();
-    }
-
-    onOpen(...args) {
-        this.props.onOpen && this.onOpen.onClose(...args);
-    }
-
-    async close() {
-        return await this.refs.modal.close();
-    }
-
-    onClose(...args) {
-        this.props.onClose && this.props.onClose(...args);
-    }
-
-    async onSelect(...args) {
-        await this.close();
-        this.props.onSelect(...args);
+    onSelect(...args) {
+        this.close();
+        this.props.onSelect && this.props.onSelect(...args);
     }
 
     scrollToIndex(params) {
-        this.refs.select.scrollToIndex(params);
+        this.select.scrollToIndex(params);
     }
 
     scrollToItem(params) {
-        this.refs.select.scrollToItem(params);
+        this.select.scrollToItem(params);
     }
 
     scrollToOffset(params) {
-        this.refs.select.scrollToOffset(params);
+        this.select.scrollToOffset(params);
     }
 
     flashScrollIndicators() {
-        this.refs.select.flashScrollIndicators();
+        this.select.flashScrollIndicators();
     }
 
     getScrollMetrics() {
-        return this.refs.select.getScrollMetrics();
+        return this.select.getScrollMetrics();
+    }
+
+    open() {
+        this.setState({ modalVisible: true });
+    }
+
+    close() {
+        this.setState({ modalVisible: false });
     }
 
     render() {
 
         const {
-            title,
             renderPlaceholder,
             onSelect,
-            renderLeftComponent,
-            timeline,
+            onRequestClose,
             ...others
         } = this.props;
 
         if (!renderPlaceholder) throw new Error("renderPlaceholder is not defined.");
         const placeholder = renderPlaceholder();
 
+        const renderModalHeaderComponent = this.props.renderModalHeaderComponent ? this.props.renderModalHeaderComponent() : this.renderModalHeaderComponent();
+        const renderModalFooterComponent = this.props.renderModalFooterComponent ? this.props.renderModalFooterComponent() : this.renderModalFooterComponent();
+
         return (
             <View>
                 <Modal
-                    ref={"modal"}
-                    title
-                    onOpen={(...args) => this.onOpen(...args)}
-                    onClose={(...args) => this.onClose(...args)}
-                    renderLeftComponent={(...args) => renderLeftComponent && renderLeftComponent(...args)}
+                    modalVisible={modalVisible}
+                    onRequestClose={onRequestClose}
                 >
+                    {renderModalHeaderComponent}
                     <Select
-                        ref={"select"}
-                        onSelect={(...args) => this.onSelect(...args)}
-                        timeline={timeline}
+                        ref={ref => this.select = ref}
+                        onSelect={(...args) => {
+                            this.onSelect(...args);
+                        }}
                         {...others}
                     />
+                    {renderModalFooterComponent}
                 </Modal>
                 <TouchableOpacity
                     onPress={() => this.open()}
@@ -93,6 +85,33 @@ class ComboBox extends PureComponent {
                 </TouchableOpacity>
             </View>
         )
+    }
+
+    renderModalHeaderComponent() {
+        return (
+            <View style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                height: 40,
+            }}>
+                <Icon
+                    onPress={() => {
+                        this.close();
+                    }}
+                    name="ios-close"
+                    style={{
+                        width: 48,
+                        height: 48,
+                        color: theme.TEXT_COLOR,
+                        fontSize: 48,
+                    }}
+                />
+            </View>
+        );
+    }
+
+    renderModalFooterComponent() {
+        return null;
     }
 };
 

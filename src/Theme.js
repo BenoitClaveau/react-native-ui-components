@@ -1,5 +1,4 @@
 import { PixelRatio } from 'react-native';
-import ReactNativePropRegistry from "react-native/Libraries/Renderer/shims/ReactNativePropRegistry";
 
 const fontScale = PixelRatio.getFontScale();
 
@@ -15,21 +14,11 @@ const theme = {
     INPUT_FONT_SIZE: 18 * fontScale,
     TITLE_FONT_SIZE: 20 * fontScale,
     ICON_FONT_SIZE: 28 * fontScale,
+    PADDING: 16,
 }
 
 export default theme;
 
 export function customize(options) {
     Object.assign(theme, options);
-}
-
-export function overrideStyle(defaultStyle = {}, newStyle = {}) {
-    if (typeof defaultStyle == "number") defaultStyle = ReactNativePropRegistry.getByID(defaultStyle)
-    const copy = {...defaultStyle};
-    for(([k, v]) of Object.entries(newStyle)) {
-        if (v != null) {
-            copy[k] = v;
-        }
-    }
-    return copy;
 }

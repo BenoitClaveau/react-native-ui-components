@@ -9,11 +9,10 @@ import debounce from 'debounce';
 class AutoComplete extends PureComponent {
 
     state = {
-        modalVisible: 0,
         q: null
     }
 
-    onChange(text) {
+    onSearchChange(text) {
         if (!text) text = null;
         this.setState({ q: text }, () => {
             this.debounceFetch();
@@ -28,6 +27,8 @@ class AutoComplete extends PureComponent {
         const {
             searchPlacehodler,
             renderPlaceholder,
+            modalVisible,
+           	onRequestClose,
             ...others
         } = this.props;
 
@@ -36,11 +37,15 @@ class AutoComplete extends PureComponent {
         return (
             <View>
                 <Modal
-                    search={this.state.q}
-                    searchPlacehodler={searchPlacehodler}
-                    onSearchChange={text => this.onChange(text)}
-                    renderPlaceholder={renderPlaceholder}
+                    modalVisible={modalVisible}
+                    onRequestClose={onRequestClose}
                 >
+                    <Toolbar
+                        search={this.state.q}
+                        searchPlacehodler={searchPlacehodler}
+                        onSearchChange={text => this.onSearchChange(text)}
+                        renderPlaceholder={renderPlaceholder}
+                    />
                     <Select
                         {...others}
                     />

@@ -1,10 +1,10 @@
-
 export { default as Theme } from './src/Theme';
 export { default as Button } from './src/Button';
 export { default as Modal } from './src/Modal';
 export { default as ComboBox } from './src/ComboBox';
 export { default as DatePicker } from './src/DatePicker';
 export { default as Icon } from './src/Icon';
+export { default as CheckBox } from './src/CheckBox';
 export { default as Select } from './src/Select';
 export { default as TextInput } from './src/TextInput';
 export { default as Toolbar } from './src/Toolbar';
@@ -19,7 +19,7 @@ export { default as Dialog } from './src/Dialog';
 export { default as TextEditor } from './src/TextEditor';
 export { default as Timeline } from './src/Timeline';
 export { default as VerticalExpandeable } from './src/VerticalExpandeable';
-export { default as KeyboardInvariantView } from './src/KeyboardInvariantView';
+export { default as KeyboardAvoidingView } from './src/KeyboardAvoidingView';
 export { default as SafeAreaView } from './src/SafeAreaView';
 export { 
     default as ThemeProvider,

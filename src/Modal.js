@@ -2,43 +2,25 @@ import React, { PureComponent } from 'react';
 import {
     Modal,
 } from 'react-native';
-import Toolbar from './Toolbar';
 import SafeAreaView from './SafeAreaView';
 
 class MyModal extends PureComponent {
 
-    state = {
-        modalVisible: false,
-    }
-
-    async open() {
-        const { onOpen } = this.props;
-        return await new Promise((resolve, reject) => {
-            this.setState({
-                modalVisible: true
-            }, () => {
-                onOpen && onOpen();
-                resolve();
-            });
-        });
-    }
-
-    async close() {
-        const { onClose } = this.props;
-        return await new Promise((resolve, reject) => {
-            this.setState({
-                modalVisible: false
-            }, () => {
-                onClose && onClose();
-                resolve();
-            });
-        });
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.modalVisible !== this.props.modalVisible) {
+            this.props.onComponentDidUpdate && this.props.onComponentDidUpdate(prevProps, prevState);
+        }
     }
 
     render() {
 
         const {
             children,
+            style,
+            modalVisible,
+            onRequestClose,
+            onKeyboardDidShow,
+            onKeyboardDidHide,
             ...others
         } = this.props;
 
@@ -46,14 +28,15 @@ class MyModal extends PureComponent {
             <Modal
                 animationType={"fade"}
                 transparent={false}
-                visible={this.state.modalVisible}
-                onRequestClose={() => this.close()}
+                visible={modalVisible}
+                onRequestClose={onRequestClose}
+                {...others}
             >
-                <SafeAreaView>
-                    <Toolbar
-                        {...others}
-                        close={() => this.close()}
-                    />
+                <SafeAreaView
+                    style={style}
+                    onKeyboardDidShow={onKeyboardDidShow}
+                    onKeyboardDidHide={onKeyboardDidHide}
+                >
                     {children}
                 </SafeAreaView>
             </Modal>
