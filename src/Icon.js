@@ -77,7 +77,7 @@ export function createStyleSheet() {
     styles = StyleSheet.create({
         container: {
             justifyContent: "center",
-            alignItems: "center",
+            alignItems: "center"
         }
     });
 };
