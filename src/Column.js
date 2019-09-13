@@ -48,6 +48,7 @@ export function createStyleSheet() {
             justifyContent: "flex-start",
         }
     });
+    console.log("[react-native-ui-components] Column createStyleSheet", styles);
 };
 
 export default Column;

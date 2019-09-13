@@ -182,6 +182,7 @@ export function createStyleSheet() {
             })
         }
     });
+    console.log("[react-native-ui-components] Toolbar createStyleSheet", styles);
 };
 
 export default Toolbar;

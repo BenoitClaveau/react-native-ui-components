@@ -34,12 +34,13 @@ class Group extends PureComponent {
 };
 
 let styles = {};
-    export function createStyleSheet() {
-        styles = StyleSheet.create({
+export function createStyleSheet() {
+    styles = StyleSheet.create({
         container: {
             padding: 16,
         }
     });
+    console.log("[react-native-ui-components] Group createStyleSheet", styles);
 };
 
 export default Group;

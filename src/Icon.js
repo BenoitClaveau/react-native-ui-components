@@ -77,9 +77,8 @@ export function createStyleSheet() {
     styles = StyleSheet.create({
         container: {
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
+            backgroundColor: "transparent"
         }
     });
-};
-
-export default MyIcon;
+    console.log("[react-native-ui-components] Icon createStyleS

@@ -58,6 +58,7 @@ export function createStyleSheet() {
             borderRadius: 32,
         },
     });
+    console.log("[react-native-ui-components] Button createStyleSheet", styles);
 };
 
 export default Button;

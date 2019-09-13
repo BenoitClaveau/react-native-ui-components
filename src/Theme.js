@@ -21,4 +21,5 @@ export default theme;
 
 export function customize(options) {
     Object.assign(theme, options);
+    console.log("[react-native-ui-components] customize", theme);
 }
