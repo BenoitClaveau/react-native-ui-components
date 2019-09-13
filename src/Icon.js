@@ -81,4 +81,7 @@ export function createStyleSheet() {
             backgroundColor: "transparent"
         }
     });
-    console.log("[react-native-ui-components] Icon createStyleS
+    console.log("[react-native-ui-components] Icon createStyleSheet", styles);
+};
+
+export default MyIcon;
