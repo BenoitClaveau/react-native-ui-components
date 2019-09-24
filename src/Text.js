@@ -15,13 +15,6 @@ class MyText extends PureComponent {
             children,
             onPress,
             containerStyles,
-            paddingTop,
-            paddingBottom,
-            paddingLeft,
-            paddingRight,
-            paddingHorizontal,
-            paddingVertical,
-            padding,
             widthOffset,
             ...others
         } = this.props;
@@ -30,13 +23,6 @@ class MyText extends PureComponent {
             <Text 
                 {...others}
                 style={[styles.text, { 
-                    padding: padding ? theme.PADDING : undefined, 
-                    paddingHorizontal: paddingHorizontal ? theme.PADDING : undefined, 
-                    paddingVertical: paddingVertical ? theme.PADDING : undefined,
-                    paddingTop: paddingTop ? theme.PADDING : undefined,
-                    paddingBottom: paddingBottom ? theme.PADDING : undefined,
-                    paddingLeft: paddingLeft ? theme.PADDING : undefined,
-                    paddingRight: paddingRight ? theme.PADDING : undefined,
                     width: widthOffset ? Dimensions.get("window").width - widthOffset : undefined,
                 }, style]}
             >{children}</Text>
@@ -64,6 +50,7 @@ export function createStyleSheet() {
         text: {
             fontSize: theme.TEXT_FONT_SIZE,
             color: theme.TEXT_COLOR,
+            padding: theme.PADDING,
             fontWeight: "500"
         }
     });
