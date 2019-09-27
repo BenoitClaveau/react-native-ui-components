@@ -19,11 +19,13 @@ class MyText extends PureComponent {
             ...others
         } = this.props;
 
+        const width = widthOffset ? Dimensions.get("window").width - widthOffset : null;
+
         const text = (
             <Text 
                 {...others}
                 style={[styles.text, { 
-                    width: widthOffset ? Dimensions.get("window").width - widthOffset : undefined,
+                    width
                 }, style]}
             >{children}</Text>
         );
@@ -50,7 +52,6 @@ export function createStyleSheet() {
         text: {
             fontSize: theme.TEXT_FONT_SIZE,
             color: theme.TEXT_COLOR,
-            padding: theme.PADDING,
             fontWeight: "500"
         }
     });
