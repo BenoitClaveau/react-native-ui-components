@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet } from 'react-native';
 import Text from "./Text";
-import theme from "./Theme";
+import Theme from "./Theme";
 
 class Title extends PureComponent {
 
@@ -20,17 +20,16 @@ class Title extends PureComponent {
     }
 };
 
-let styles = {};
-export function createStyleSheet() {
+let styles = Theme.register(()=> {
     styles = StyleSheet.create({
         text: {
-            fontSize: theme.TITLE_FONT_SIZE,
-            color: theme.PRIMARY_COLOR,
+            fontSize: Theme.TITLE_FONT_SIZE,
+            color: Theme.PRIMARY_COLOR,
             fontWeight: "600"
         },
     });
     console.log("[react-native-ui-components] Title createStyleSheet", styles);
-};
+});
 
 
 export default Title;

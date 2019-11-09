@@ -39,8 +39,7 @@ class Column extends PureComponent {
     }
 };
 
-let styles = {};
-export function createStyleSheet() {
+let styles = Theme.register(()=> {
     styles = StyleSheet.create({
         column: {
             flexDirection: "column",
@@ -49,6 +48,6 @@ export function createStyleSheet() {
         }
     });
     console.log("[react-native-ui-components] Column createStyleSheet", styles);
-};
+});
 
 export default Column;

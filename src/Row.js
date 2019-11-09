@@ -38,8 +38,8 @@ class Row extends PureComponent {
         return view;
     }
 };
-let styles = {};
-export function createStyleSheet() {
+
+let styles = Theme.register(()=> {
     styles = StyleSheet.create({
         row: {
             flexDirection: "row",
@@ -48,6 +48,6 @@ export function createStyleSheet() {
         }
     });
     console.log("[react-native-ui-components] Row createStyleSheet", styles);
-}
+});
 
 export default Row;

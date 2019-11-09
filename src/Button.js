@@ -4,7 +4,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
-import theme from "./Theme";
+import Theme from "./Theme";
 
 class Button extends PureComponent {
 
@@ -46,19 +46,18 @@ class Button extends PureComponent {
     }
 };
 
-let styles = {};
-export function createStyleSheet() {
+let styles = Theme.register(()=> {
     styles = StyleSheet.create({
         container: {
             paddingVertical: 16,
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: theme.PRIMARY_COLOR,
+            backgroundColor: Theme.PRIMARY_COLOR,
             borderRadius: 32,
         },
     });
     console.log("[react-native-ui-components] Button createStyleSheet", styles);
-};
+});
 
 export default Button;

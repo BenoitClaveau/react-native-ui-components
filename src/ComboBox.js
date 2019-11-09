@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import Select from './Select';
 import Modal from './Modal';
-import theme from "./Theme";
+import Theme from "./Theme";
 import Icon from './Icon';
 
 class ComboBox extends PureComponent {
@@ -102,7 +102,7 @@ class ComboBox extends PureComponent {
                     style={{
                         width: 48,
                         height: 48,
-                        color: theme.TEXT_COLOR,
+                        color: Theme.TEXT_COLOR,
                         fontSize: 48,
                     }}
                 />

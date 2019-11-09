@@ -5,7 +5,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import Icon from "./Icon";
-import theme from "./Theme";
+import Theme from "./Theme";
 
 class CheckBox extends PureComponent {
 
@@ -26,15 +26,15 @@ class CheckBox extends PureComponent {
                     width: fontSize,
                     height: fontSize,
                     borderRadius: Math.ceil(fontSize / 2),
-                    borderColor: checked ? theme.PRIMARY_COLOR : theme.INACTIVE_PRIMARY_COLOR,
-                    backgroundColor: checked ? theme.PRIMARY_COLOR : theme.BACKGROUND_COLOR,
+                    borderColor: checked ? Theme.PRIMARY_COLOR : Theme.INACTIVE_PRIMARY_COLOR,
+                    backgroundColor: checked ? Theme.PRIMARY_COLOR : Theme.BACKGROUND_COLOR,
                 }]}>
                     {checked ? (
                         <Icon
                             name="ios-checkmark"
                             style={[styles.icon, {
                                 fontSize,
-                                color: theme.BACKGROUND_COLOR,
+                                color: Theme.BACKGROUND_COLOR,
                                 backgroundColor: "transparent"
                             }]}
                         />
@@ -46,8 +46,7 @@ class CheckBox extends PureComponent {
     }
 };
 
-let styles = {};
-export function createStyleSheet() {
+let styles = Theme.register(()=> {
     styles = StyleSheet.create({
         container: {
             borderWidth: 1.5,
@@ -59,7 +58,7 @@ export function createStyleSheet() {
         }
     });
     console.log("[react-native-ui-components] CheckBox createStyleSheet", styles);
-};
+});
 
 
 export default CheckBox;

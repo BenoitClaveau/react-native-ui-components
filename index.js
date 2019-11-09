@@ -1,4 +1,8 @@
-export { default as Theme } from './src/Theme';
+export { 
+    default as Theme,
+    register,
+    customize
+} from './src/Theme';
 export { default as Button } from './src/Button';
 export { default as Modal } from './src/Modal';
 export { default as ComboBox } from './src/ComboBox';
@@ -21,7 +25,4 @@ export { default as Timeline } from './src/Timeline';
 export { default as VerticalExpandeable } from './src/VerticalExpandeable';
 export { default as KeyboardAvoidingView } from './src/KeyboardAvoidingView';
 export { default as SafeAreaView } from './src/SafeAreaView';
-export { 
-    default as ThemeProvider,
-    customize
-} from './src/ThemeProvider';
+export { default as ThemeProvider } from './src/ThemeProvider';

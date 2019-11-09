@@ -9,7 +9,7 @@ import {
 import Modal from './Modal';
 import Button from './Button';
 import Text from './Text';
-import theme from "./Theme";
+import Theme from "./Theme";
 import Icon from './Icon';
 
 class TextEditor extends PureComponent {
@@ -123,7 +123,7 @@ class TextEditor extends PureComponent {
                     style={{
                         width: 48,
                         height: 48,
-                        color: theme.TEXT_COLOR,
+                        color: Theme.TEXT_COLOR,
                         fontSize: 48,
                     }}
                 />
@@ -135,7 +135,7 @@ class TextEditor extends PureComponent {
                     style={{
                         width: 48,
                         height: 48,
-                        color: theme.PRIMARY_COLOR,
+                        color: Theme.PRIMARY_COLOR,
                         fontSize: 48,
                     }}
                 />
@@ -166,19 +166,18 @@ class TextEditor extends PureComponent {
     }
 };
 
-let styles = {};
-export function createStyleSheet() {
+let styles = Theme.register(()=> {
     styles = StyleSheet.create({
         textinput: {
             backgroundColor: "#FFF",
             paddingHorizontal: 16,
-            fontSize: theme.INPUT_FONT_SIZE,
+            fontSize: Theme.INPUT_FONT_SIZE,
             fontWeight: "600",
             textAlignVertical: "top",
-            color: theme.TEXT_COLOR,
+            color: Theme.TEXT_COLOR,
         }
     });
     console.log("[react-native-ui-components] TextEditor createStyleSheet", styles);
-};
+});
 
 export default TextEditor;

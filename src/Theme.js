@@ -19,7 +19,17 @@ const theme = {
 
 export default theme;
 
+const callbacks = [];
+export function register(fn) {
+    if (callbacks.some(e => e == fn)) return fn();
+    callbacks.push(callbacks);
+    return fn();
+}
+
 export function customize(options) {
     Object.assign(theme, options);
     console.log("[react-native-ui-components] customize", theme);
+    for (let fn of callbacks) {
+        fn();
+    }
 }

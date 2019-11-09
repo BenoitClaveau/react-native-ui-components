@@ -72,8 +72,7 @@ class MyIcon extends PureComponent {
     }
 };
 
-let styles = {};
-export function createStyleSheet() {
+let styles = Theme.register(()=> {
     styles = StyleSheet.create({
         container: {
             justifyContent: "center",
@@ -82,6 +81,6 @@ export function createStyleSheet() {
         }
     });
     console.log("[react-native-ui-components] Icon createStyleSheet", styles);
-};
+});
 
 export default MyIcon;

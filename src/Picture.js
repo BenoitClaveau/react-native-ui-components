@@ -45,8 +45,7 @@ class Picture extends PureComponent {
     }
 };
 
-let styles = {};
-export function createStyleSheet() {
+let styles = Theme.register(()=> {
     styles = StyleSheet.create({
         container: {
             flexDirection: "column",
@@ -55,6 +54,6 @@ export function createStyleSheet() {
         }
     });
     console.log("[react-native-ui-components] Picture createStyleSheet", styles);
-}
+});
 
 export default Picture;

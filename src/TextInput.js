@@ -4,7 +4,7 @@ import {
     TextInput,
     View
 } from 'react-native';
-import theme from "./Theme";
+import Theme from "./Theme";
 
 class MyTextInput extends PureComponent {
 
@@ -43,21 +43,20 @@ class MyTextInput extends PureComponent {
     }
 };
 
-let styles = {};
-export function createStyleSheet() {
+let styles = Theme.register(()=> {
     styles = StyleSheet.create({
         input: {
             flexDirection: "row", 
-            backgroundColor: theme.INPUT_BACKGROUND_COLOR,
+            backgroundColor: Theme.INPUT_BACKGROUND_COLOR,
             paddingHorizontal: 16,
             borderRadius: 12,
-            fontSize: theme.INPUT_FONT_SIZE,
-            color: theme.PRIMARY_COLOR,
+            fontSize: Theme.INPUT_FONT_SIZE,
+            color: Theme.PRIMARY_COLOR,
             fontWeight: "600",
             height: 56,
         },
     });
     console.log("[react-native-ui-components] TextInput createStyleSheet", styles);
-};
+});
 
 export default MyTextInput;

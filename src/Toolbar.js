@@ -8,7 +8,7 @@ import {
 import Button from './Button';
 import Icon from './Icon';
 import TextInput from './TextInput';
-import theme from "./Theme";
+import Theme from "./Theme";
 
 class Toolbar extends PureComponent {
 
@@ -87,8 +87,7 @@ class Toolbar extends PureComponent {
     }
 };
 
-let styles = {};
-export function createStyleSheet() {
+let styles = Theme.register(()=> {
     styles = StyleSheet.create({
         container: {
             flexDirection: "row",
@@ -162,14 +161,14 @@ export function createStyleSheet() {
             })
         },
         title: {
-            fontSize: theme.TITLE_FONT_SIZE,
-            color: theme.PRIMARY_COLOR,
+            fontSize: Theme.TITLE_FONT_SIZE,
+            color: Theme.PRIMARY_COLOR,
             fontWeight: "600",
         },
         icon: {
             alignItems: 'center',
             justifyContent: 'center',
-            color: theme.TEXT_COLOR,
+            color: Theme.TEXT_COLOR,
             ...Platform.select({
                 ios: {
                     width: 44,
@@ -183,6 +182,6 @@ export function createStyleSheet() {
         }
     });
     console.log("[react-native-ui-components] Toolbar createStyleSheet", styles);
-};
+});
 
 export default Toolbar;

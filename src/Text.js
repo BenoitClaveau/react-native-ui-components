@@ -5,7 +5,7 @@ import {
     Text,
     Dimensions
 } from 'react-native';
-import theme from "./Theme";
+import Theme from "./Theme";
 
 class MyText extends PureComponent {
 
@@ -46,16 +46,15 @@ class MyText extends PureComponent {
     }
 };
 
-let styles = {};
-export function createStyleSheet() {
+let styles = Theme.register(()=> {
     styles = StyleSheet.create({
         text: {
-            fontSize: theme.TEXT_FONT_SIZE,
-            color: theme.TEXT_COLOR,
+            fontSize: Theme.TEXT_FONT_SIZE,
+            color: Theme.TEXT_COLOR,
             fontWeight: "500"
         }
     });
     console.log("[react-native-ui-components] Text createStyleSheet", styles);
-};
+});
 
 export default MyText;
