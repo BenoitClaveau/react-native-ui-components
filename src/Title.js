@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet } from 'react-native';
 import Text from "./Text";
-import Theme from "./Theme";
+import Theme, { createStyleSheet } from "./Theme";
 
 class Title extends PureComponent {
 
@@ -20,7 +20,7 @@ class Title extends PureComponent {
     }
 };
 
-let styles = Theme.register(()=> {
+let styles = createStyleSheet(()=> {
     styles = StyleSheet.create({
         text: {
             fontSize: Theme.TITLE_FONT_SIZE,

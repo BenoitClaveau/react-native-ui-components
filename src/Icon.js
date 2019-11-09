@@ -12,6 +12,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome5Pro from 'react-native-vector-icons/FontAwesome5Pro';
 import Foundation from 'react-native-vector-icons/Foundation';
+import { createStyleSheet } from "./Theme";
 
 class MyIcon extends PureComponent {
 
@@ -72,7 +73,7 @@ class MyIcon extends PureComponent {
     }
 };
 
-let styles = Theme.register(()=> {
+let styles = createStyleSheet(()=> {
     styles = StyleSheet.create({
         container: {
             justifyContent: "center",

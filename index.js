@@ -1,6 +1,6 @@
 export { 
     default as Theme,
-    register,
+    createStyleSheet,
     customize
 } from './src/Theme';
 export { default as Button } from './src/Button';

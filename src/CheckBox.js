@@ -5,7 +5,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import Icon from "./Icon";
-import Theme from "./Theme";
+import Theme, { createStyleSheet } from "./Theme";
 
 class CheckBox extends PureComponent {
 
@@ -46,7 +46,7 @@ class CheckBox extends PureComponent {
     }
 };
 
-let styles = Theme.register(()=> {
+let styles = createStyleSheet(()=> {
     styles = StyleSheet.create({
         container: {
             borderWidth: 1.5,

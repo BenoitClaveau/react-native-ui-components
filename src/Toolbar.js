@@ -5,10 +5,8 @@ import {
     View,
     Text
 } from 'react-native';
-import Button from './Button';
 import Icon from './Icon';
-import TextInput from './TextInput';
-import Theme from "./Theme";
+import Theme, { createStyleSheet } from "./Theme";
 
 class Toolbar extends PureComponent {
 
@@ -87,7 +85,7 @@ class Toolbar extends PureComponent {
     }
 };
 
-let styles = Theme.register(()=> {
+let styles = createStyleSheet(()=> {
     styles = StyleSheet.create({
         container: {
             flexDirection: "row",

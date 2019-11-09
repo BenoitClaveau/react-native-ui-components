@@ -1,4 +1,7 @@
-import { PixelRatio } from 'react-native';
+import { 
+    PixelRatio,
+    StyleSheet
+} from 'react-native';
 
 const fontScale = PixelRatio.getFontScale();
 
@@ -20,9 +23,9 @@ const theme = {
 export default theme;
 
 const callbacks = [];
-export function register(fn) {
+export function createStyleSheet(fn) {
     if (callbacks.some(e => e == fn)) return fn();
-    callbacks.push(callbacks);
+    callbacks.push(fn);
     return fn();
 }
 

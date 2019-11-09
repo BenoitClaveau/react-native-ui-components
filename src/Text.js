@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
 import {
-    StyleSheet,
     TouchableOpacity,
     Text,
     Dimensions
 } from 'react-native';
-import Theme from "./Theme";
+import Theme, { createStyleSheet } from "./Theme";
 
 class MyText extends PureComponent {
 
@@ -46,7 +45,7 @@ class MyText extends PureComponent {
     }
 };
 
-let styles = Theme.register(()=> {
+let styles = createStyleSheet(()=> {
     styles = StyleSheet.create({
         text: {
             fontSize: Theme.TEXT_FONT_SIZE,

@@ -4,6 +4,7 @@ import {
     View,
     TouchableOpacity,
 } from 'react-native';
+import { createStyleSheet } from "./Theme";
 
 class Column extends PureComponent {
 
@@ -39,7 +40,7 @@ class Column extends PureComponent {
     }
 };
 
-let styles = Theme.register(()=> {
+let styles = createStyleSheet(()=> {
     styles = StyleSheet.create({
         column: {
             flexDirection: "column",

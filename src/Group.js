@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
 import {
     StyleSheet,
-    TouchableOpacity,
-    Text,
     View
 } from 'react-native';
+import { createStyleSheet } from "./Theme";
 
 class Group extends PureComponent {
 
@@ -33,7 +32,7 @@ class Group extends PureComponent {
     }
 };
 
-let styles = Theme.register(()=> {
+let styles = createStyleSheet(()=> {
     styles = StyleSheet.create({
         container: {
             padding: 16,

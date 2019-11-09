@@ -5,6 +5,7 @@ import {
     Image,
     TouchableOpacity
 } from 'react-native';
+import { createStyleSheet } from "./Theme";
 
 class Picture extends PureComponent {
 
@@ -45,7 +46,7 @@ class Picture extends PureComponent {
     }
 };
 
-let styles = Theme.register(()=> {
+let styles = createStyleSheet(()=> {
     styles = StyleSheet.create({
         container: {
             flexDirection: "column",

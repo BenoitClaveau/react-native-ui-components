@@ -4,6 +4,7 @@ import {
     View,
     TouchableOpacity,
 } from 'react-native';
+import { createStyleSheet } from "./Theme";
 
 class Row extends PureComponent {
 
@@ -39,7 +40,7 @@ class Row extends PureComponent {
     }
 };
 
-let styles = Theme.register(()=> {
+let styles = createStyleSheet(()=> {
     styles = StyleSheet.create({
         row: {
             flexDirection: "row",

@@ -4,7 +4,7 @@ import {
     TextInput,
     View
 } from 'react-native';
-import Theme from "./Theme";
+import Theme, { createStyleSheet } from "./Theme";
 
 class MyTextInput extends PureComponent {
 
@@ -43,7 +43,7 @@ class MyTextInput extends PureComponent {
     }
 };
 
-let styles = Theme.register(()=> {
+let styles = createStyleSheet(()=> {
     styles = StyleSheet.create({
         input: {
             flexDirection: "row", 

@@ -4,7 +4,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
-import Theme from "./Theme";
+import Theme, { createStyleSheet } from "./Theme";
 
 class Button extends PureComponent {
 
@@ -46,7 +46,7 @@ class Button extends PureComponent {
     }
 };
 
-let styles = Theme.register(()=> {
+let styles = createStyleSheet(()=> {
     styles = StyleSheet.create({
         container: {
             paddingVertical: 16,

@@ -9,7 +9,7 @@ import {
 import Modal from './Modal';
 import Button from './Button';
 import Text from './Text';
-import Theme from "./Theme";
+import Theme, { createStyleSheet } from "./Theme";
 import Icon from './Icon';
 
 class TextEditor extends PureComponent {
@@ -166,7 +166,7 @@ class TextEditor extends PureComponent {
     }
 };
 
-let styles = Theme.register(()=> {
+let styles = createStyleSheet(()=> {
     styles = StyleSheet.create({
         textinput: {
             backgroundColor: "#FFF",
