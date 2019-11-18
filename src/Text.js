@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react';
 import {
     TouchableOpacity,
     Text,
-    Dimensions
+    Dimensions,
+    StyleSheet
 } from 'react-native';
 import Theme, { createStyleSheet } from "./Theme";
 

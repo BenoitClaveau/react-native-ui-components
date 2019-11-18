@@ -1,6 +1,5 @@
 import { 
     PixelRatio,
-    StyleSheet
 } from 'react-native';
 
 const fontScale = PixelRatio.getFontScale();
