@@ -46,7 +46,8 @@ class Button extends PureComponent {
     }
 };
 
-let styles = createStyleSheet(()=> {
+let styles;
+createStyleSheet(()=> {
     styles = StyleSheet.create({
         container: {
             paddingVertical: 16,

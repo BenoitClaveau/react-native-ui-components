@@ -43,7 +43,8 @@ class MyTextInput extends PureComponent {
     }
 };
 
-let styles = createStyleSheet(()=> {
+let styles;
+createStyleSheet(()=> {
     styles = StyleSheet.create({
         input: {
             flexDirection: "row", 

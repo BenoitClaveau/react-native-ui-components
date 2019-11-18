@@ -166,7 +166,8 @@ class TextEditor extends PureComponent {
     }
 };
 
-let styles = createStyleSheet(()=> {
+let styles;
+createStyleSheet(()=> {
     styles = StyleSheet.create({
         textinput: {
             backgroundColor: "#FFF",

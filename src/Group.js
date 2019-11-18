@@ -32,7 +32,8 @@ class Group extends PureComponent {
     }
 };
 
-let styles = createStyleSheet(()=> {
+let styles;
+createStyleSheet(()=> {
     styles = StyleSheet.create({
         container: {
             padding: 16,

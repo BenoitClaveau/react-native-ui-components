@@ -46,7 +46,8 @@ class Picture extends PureComponent {
     }
 };
 
-let styles = createStyleSheet(()=> {
+let styles;
+createStyleSheet(()=> {
     styles = StyleSheet.create({
         container: {
             flexDirection: "column",

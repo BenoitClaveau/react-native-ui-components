@@ -46,7 +46,8 @@ class MyText extends PureComponent {
     }
 };
 
-let styles = createStyleSheet(()=> {
+let styles;
+createStyleSheet(()=> {
     styles = StyleSheet.create({
         text: {
             fontSize: Theme.TEXT_FONT_SIZE,

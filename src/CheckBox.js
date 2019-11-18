@@ -46,7 +46,8 @@ class CheckBox extends PureComponent {
     }
 };
 
-let styles = createStyleSheet(()=> {
+let styles;
+createStyleSheet(()=> {
     styles = StyleSheet.create({
         container: {
             borderWidth: 1.5,

@@ -40,7 +40,8 @@ class Column extends PureComponent {
     }
 };
 
-let styles = createStyleSheet(()=> {
+let styles;
+createStyleSheet(()=> {
     styles = StyleSheet.create({
         column: {
             flexDirection: "column",

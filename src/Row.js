@@ -40,7 +40,8 @@ class Row extends PureComponent {
     }
 };
 
-let styles = createStyleSheet(()=> {
+let styles;
+createStyleSheet(()=> {
     styles = StyleSheet.create({
         row: {
             flexDirection: "row",

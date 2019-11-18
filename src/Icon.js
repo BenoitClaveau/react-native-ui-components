@@ -73,7 +73,8 @@ class MyIcon extends PureComponent {
     }
 };
 
-let styles = createStyleSheet(()=> {
+let styles;
+createStyleSheet(()=> {
     styles = StyleSheet.create({
         container: {
             justifyContent: "center",

@@ -42,7 +42,8 @@ class MySafeAreaView extends PureComponent {
     }
 };
 
-let styles = createStyleSheet(()=> {
+let styles;
+createStyleSheet(()=> {
     styles = StyleSheet.create({
         container: {
             flex: 1,

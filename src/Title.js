@@ -20,7 +20,8 @@ class Title extends PureComponent {
     }
 };
 
-let styles = createStyleSheet(()=> {
+let styles;
+createStyleSheet(()=> {
     styles = StyleSheet.create({
         text: {
             fontSize: Theme.TITLE_FONT_SIZE,
