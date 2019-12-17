@@ -57,7 +57,7 @@ createStyleSheet(()=> {
             height: 56,
         },
     });
-    console.log("[react-native-ui-components] TextInput createStyleSheet", styles);
+    // console.log("[react-native-ui-components] TextInput createStyleSheet", styles);
 });
 
 export default MyTextInput;

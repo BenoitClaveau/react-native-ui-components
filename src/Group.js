@@ -39,7 +39,7 @@ createStyleSheet(()=> {
             padding: 16,
         }
     });
-    console.log("[react-native-ui-components] Group createStyleSheet", styles);
+    // console.log("[react-native-ui-components] Group createStyleSheet", styles);
 });
 
 export default Group;

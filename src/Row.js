@@ -49,7 +49,7 @@ createStyleSheet(()=> {
             justifyContent: "flex-start",
         }
     });
-    console.log("[react-native-ui-components] Row createStyleSheet", styles);
+    // console.log("[react-native-ui-components] Row createStyleSheet", styles);
 });
 
 export default Row;

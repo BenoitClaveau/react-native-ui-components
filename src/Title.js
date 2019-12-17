@@ -29,7 +29,7 @@ createStyleSheet(()=> {
             fontWeight: "600"
         },
     });
-    console.log("[react-native-ui-components] Title createStyleSheet", styles);
+    // console.log("[react-native-ui-components] Title createStyleSheet", styles);
 });
 
 

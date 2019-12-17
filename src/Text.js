@@ -55,7 +55,7 @@ createStyleSheet(()=> {
             fontWeight: "500"
         }
     });
-    console.log("[react-native-ui-components] Text createStyleSheet", styles);
+    // console.log("[react-native-ui-components] Text createStyleSheet", styles);
 });
 
 export default MyText;

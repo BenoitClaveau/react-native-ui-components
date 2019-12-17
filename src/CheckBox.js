@@ -58,7 +58,7 @@ createStyleSheet(()=> {
             textAlign: "center"
         }
     });
-    console.log("[react-native-ui-components] CheckBox createStyleSheet", styles);
+    // console.log("[react-native-ui-components] CheckBox createStyleSheet", styles);
 });
 
 

@@ -92,7 +92,6 @@ createStyleSheet(()=> {
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "flex-start",
-            //backgroundColor: "red",
             ...Platform.select({
                 ios: {
                     height: 44,
@@ -114,7 +113,6 @@ createStyleSheet(()=> {
             flexDirection: "row",
             alignItems: 'center',
             justifyContent: 'center',
-            //backgroundColor: "blue",
             ...Platform.select({
                 ios: {
                     width: 70,
@@ -129,7 +127,6 @@ createStyleSheet(()=> {
         center: {
             flexDirection: "row",
             alignItems: 'center',
-            //backgroundColor: "black",
             flexGrow: 1,
             flexShrink: 1,
             ...Platform.select({
@@ -147,7 +144,6 @@ createStyleSheet(()=> {
             flexDirection: "row",
             alignItems: 'center',
             justifyContent: 'center',
-            //backgroundColor: "yellow",
             ...Platform.select({
                 ios: {
                     width: 70,
@@ -180,7 +176,7 @@ createStyleSheet(()=> {
             })
         }
     });
-    console.log("[react-native-ui-components] Toolbar createStyleSheet", styles);
+    // console.log("[react-native-ui-components] Toolbar createStyleSheet", styles);
 });
 
 export default Toolbar;

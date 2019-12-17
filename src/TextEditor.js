@@ -178,7 +178,7 @@ createStyleSheet(()=> {
             color: Theme.TEXT_COLOR,
         }
     });
-    console.log("[react-native-ui-components] TextEditor createStyleSheet", styles);
+    // console.log("[react-native-ui-components] TextEditor createStyleSheet", styles);
 });
 
 export default TextEditor;

@@ -55,7 +55,7 @@ createStyleSheet(()=> {
             justifyContent: "center"
         }
     });
-    console.log("[react-native-ui-components] Picture createStyleSheet", styles);
+    // console.log("[react-native-ui-components] Picture createStyleSheet", styles);
 });
 
 export default Picture;

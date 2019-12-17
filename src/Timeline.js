@@ -64,7 +64,7 @@ class Timeline extends PureComponent {
 
     scrollTo(fn, params) {
         const item = this.props.data.filter(fn)[0];
-        console.log("SCROLLTO item", item)
+        // console.log("SCROLLTO item", item)
         if (item) this.scrollToItem({ ...params, item });
     }
 
@@ -200,14 +200,14 @@ class Timeline extends PureComponent {
     }
 
     componentDidUpdate() {
-        console.log("DID UPDATE timeline")
+        // console.log("DID UPDATE timeline")
 
         this.props.onDidUpdate && this.props.onDidUpdate();
     }
 
     render() {
 
-        console.log("RENDEr timeline")
+        // console.log("RENDEr timeline")
 
         const {
             itemLength,

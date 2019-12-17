@@ -50,7 +50,7 @@ createStyleSheet(()=> {
             backgroundColor: Theme.BACKGROUND_COLOR,
         }
     });
-    console.log("[react-native-ui-components] SafeAreaView createStyleSheet", styles);
+    // console.log("[react-native-ui-components] SafeAreaView createStyleSheet", styles);
 });
 
 export default MySafeAreaView;

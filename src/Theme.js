@@ -30,7 +30,7 @@ export function createStyleSheet(fn) {
 
 export function customize(options) {
     Object.assign(theme, options);
-    console.log("[react-native-ui-components] customize", theme);
+    // console.log("[react-native-ui-components] customize", theme);
     for (let fn of callbacks) {
         fn();
     }
